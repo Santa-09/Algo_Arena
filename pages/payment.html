@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo Arena - Complete Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="shortcut icon" href="../public/algo-arena.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                <a href="index.html#home">
+                    <h1>ALGO ARENA</h1>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#games" class="nav-link">Games</a></li>
+                <li><a href="index.html#rules" class="nav-link">Rules</a></li>
+                <li><a href="free-fire.html" class="nav-link">Free Fire</a></li>
+                <li><a href="valo.html" class="nav-link">Valorant</a></li>
+            </ul>
+            
+            <button class="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html#about" class="nav-link">About</a></li>
+            <li><a href="index.html#games" class="nav-link">Games</a></li>
+            <li><a href="index.html#rules" class="nav-link">Rules</a></li>
+            <li><a href="free-fire.html" class="nav-link">Free Fire</a></li>
+            <li><a href="valo.html" class="nav-link">Valorant</a></li>
+        </ul>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Payment Header -->
+    <section class="hero bg-secondary">
+        <div class="container">
+            <div class="form-header text-center">
+                <h2 class="section-title">Complete Your Registration</h2>
+                <p class="section-subtitle">
+                    Scan the QR code to make payment and enter your transaction ID below to verify your payment
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Container -->
+    <section class="section">
+        <div class="container">
+            <div id="registration-summary" class="mb-5"></div>
+
+            <div class="payment-container fade-in">
+                <div class="payment-grid">
+                    <!-- QR Code Section -->
+                    <div class="qr-section slide-left">
+                        <div class="card qr-container">
+                            <div class="qr-header">
+                                <h4><i class="fas fa-qrcode text-gradient"></i> Scan to Pay</h4>
+                                <p class="small">Amount: <span class="amount">₹20</span></p>
+                            </div>
+                            
+                            <div class="qr-display" id="qrcode">
+                                <!-- QR Code will be generated here -->
+                                <div class="qr-placeholder">
+                                    <i class="fas fa-spinner fa-spin fa-3x"></i>
+                                    <p>Generating QR code...</p>
+                                </div>
+                            </div>
+                            
+                            <div class="qr-details">
+                                <div class="upi-details">
+                                    <h5><i class="fas fa-mobile-alt"></i> UPI Details</h5>
+                                    <div class="upi-info">
+                                        <div class="info-row">
+                                            <span class="label">UPI ID:</span>
+                                            <span class="value" id="upi-id">9692699132@fam</span>
+                                            <button class="copy-btn" onclick="copyUpiId()">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                        <div class="info-row">
+                                            <span class="label">Payee Name:</span>
+                                            <span class="value">Algo Arena</span>
+                                        </div>
+                                        <div class="info-row">
+                                            <span class="label">Amount:</span>
+                                            <span class="value amount">₹20</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Payment Options -->
+                        <div class="payment-options">
+                            <div class="option-grid">
+                                <div class="payment-option" onclick="redirectToUpi('gpay')">
+                                    <i class="fab fa-google-pay"></i>
+                                    <span>Google Pay</span>
+                                </div>
+                                <div class="payment-option" onclick="redirectToUpi('phonepe')">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>PhonePe</span>
+                                </div>
+                                <div class="payment-option" onclick="redirectToUpi('paytm')">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>Paytm</span>
+                                </div>
+                                <div class="payment-option" onclick="redirectToUpi('bhim')">
+                                    <i class="fas fa-rupee-sign"></i>
+                                    <span>BHIM UPI</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Alternative Methods -->
+                        <div class="alt-methods">
+                            <p class="separator">OR</p>
+                            <a href="upi://pay?pa=9692699132@fam&pn=Algo_Arena&am=20&cu=INR" 
+                               class="btn btn-primary upi-redirect">
+                                <i class="fas fa-external-link-alt"></i> Open UPI App
+                            </a>
+                            <button class="btn btn-outline mt-2" onclick="showManualInstructions()">
+                                <i class="fas fa-question-circle"></i> Need Help?
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Transaction Verification -->
+                    <div class="verification-section slide-right">
+                        <div class="card">
+                            <div class="verification-header">
+                                <h4><i class="fas fa-check-circle text-gradient"></i> Verify Payment</h4>
+                                <p>Enter your UPI transaction ID after completing the payment</p>
+                            </div>
+                            
+                            <form id="paymentForm" class="transaction-form">
+                                <div class="form-group">
+                                    <label for="transaction-id" class="required">Transaction ID</label>
+                                    <input type="text" id="transaction-id" name="transaction_id"
+                                           placeholder="Enter your UPI transaction ID" required>
+                                    <span class="help-text">
+                                        <i class="fas fa-info-circle"></i> 
+                                        You'll find this in your payment receipt or bank statement
+                                    </span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="payment-screenshot">Payment Screenshot (Optional)</label>
+                                    <div class="file-input">
+                                        <input type="file" id="payment-screenshot" name="screenshot" 
+                                               accept="image/*" capture="environment">
+                                        <label for="payment-screenshot" class="file-input-label">
+                                            <i class="fas fa-camera"></i>
+                                            <span>Upload Payment Screenshot</span>
+                                        </label>
+                                    </div>
+                                    <span class="help-text">Upload screenshot for faster verification</span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="payment-time">Payment Date & Time</label>
+                                    <input type="datetime-local" id="payment-time" name="payment_time">
+                                </div>
+                                
+                                <button type="button" class="btn btn-primary verify-button" onclick="verifyPayment()">
+                                    <i class="fas fa-check-circle"></i> Verify Payment
+                                </button>
+                                
+                                <!-- Status Messages -->
+                                <div class="form-messages mt-4">
+                                    <div id="success-message" class="form-message success" style="display: none;">
+                                        <i class="fas fa-check-circle"></i>
+                                        <div>
+                                            <strong>Payment Verified Successfully!</strong>
+                                            <p>Your registration is now complete. We'll send you a confirmation email shortly.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="error-message" class="form-message error" style="display: none;">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <div>
+                                            <strong>Verification Failed</strong>
+                                            <p>Please check your transaction ID and try again. If the problem persists, contact support.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Payment Instructions -->
+                        <div class="payment-instructions card mt-4">
+                            <h5><i class="fas fa-lightbulb text-gradient"></i> How to Pay</h5>
+                            <ol class="instructions-list">
+                                <li>Scan the QR code with any UPI app</li>
+                                <li>Or click "Open UPI App" button</li>
+                                <li>Complete payment of ₹20</li>
+                                <li>Copy the transaction ID from receipt</li>
+                                <li>Paste it in the form and verify</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Important Notice -->
+                <div class="payment-notice card mt-5">
+                    <div class="notice-content">
+                        <i class="fas fa-exclamation-triangle fa-2x text-gradient"></i>
+                        <div>
+                            <h4>Important Information</h4>
+                            <ul>
+                                <li>Your registration will be confirmed only after payment verification</li>
+                                <li>Verification may take up to 24 hours</li>
+                                <li>Keep your transaction ID safe for reference</li>
+                                <li>For immediate assistance, contact our support team</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                    <h3>ALGO ARENA</h3>
+                </div>
+                <p>Secure payment processing for tournament registration.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="mailto:support@algoarena.com">Email Support</a></li>
+                    <li><a href="https://discord.gg/algoarena" target="_blank">Discord</a></li>
+                    <li><a href="tel:+919692699132">+91 9692699132</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="free-fire.html">Free Fire</a></li>
+                    <li><a href="valo.html">Valorant</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="copyright">© <span id="current-year">2025</span> Algo Arena. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/supabaseClient.js"></script>
+    <script src="../js/payment.js"></script>
+    <script>
+        // Payment Configuration
+        const PAYMENT_CONFIG = {
+            upiId: '9692699132@fam',
+            payeeName: 'Algo Arena',
+            amount: '20',
+            currency: 'INR',
+            successRedirectDelay: 5000
+        };
+
+        // Generate QR Code on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            generateQRCode();
+            loadRegistrationSummary();
+            setupEventListeners();
+            
+            // Add custom styles
+            addPaymentStyles();
+        });
+
+        function generateQRCode() {
+            const upiURL = `upi://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${encodeURIComponent(PAYMENT_CONFIG.payeeName)}&am=${PAYMENT_CONFIG.amount}&cu=${PAYMENT_CONFIG.currency}`;
+            const qrElement = document.getElementById('qrcode');
+            
+            qrElement.innerHTML = '';
+            
+            QRCode.toCanvas(qrElement, upiURL, {
+                width: 250,
+                margin: 2,
+                color: {
+                    dark: '#000000',
+                    light: '#ffffff'
+                },
+                errorCorrectionLevel: 'H'
+            }, function(error) {
+                if (error) {
+                    qrElement.innerHTML = `
+                        <div class="qr-error">
+                            <i class="fas fa-exclamation-triangle fa-3x"></i>
+                            <p>Failed to generate QR code. Please use UPI app directly.</p>
+                        </div>
+                    `;
+                    console.error('QR Code generation error:', error);
+                }
+            });
+        }
+
+        function loadRegistrationSummary() {
+            const summaryElement = document.getElementById('registration-summary');
+            const game = localStorage.getItem('currentGame') || sessionStorage.getItem('currentGame') || 'Tournament';
+            const teamName = localStorage.getItem('teamName') || sessionStorage.getItem('teamName') || 'Your Team';
+            
+            if (summaryElement) {
+                summaryElement.innerHTML = `
+                    <div class="registration-summary card">
+                        <div class="summary-header">
+                            <h4><i class="fas fa-receipt"></i> Registration Summary</h4>
+                        </div>
+                        <div class="summary-details">
+                            <div class="detail-item">
+                                <span class="label">Game:</span>
+                                <span class="value">${game}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Team:</span>
+                                <span class="value">${teamName}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Amount:</span>
+                                <span class="value amount">₹${PAYMENT_CONFIG.amount}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">Status:</span>
+                                <span class="status-badge pending">Payment Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function setupEventListeners() {
+            // Copy UPI ID functionality
+            window.copyUpiId = function() {
+                navigator.clipboard.writeText(PAYMENT_CONFIG.upiId)
+                    .then(() => {
+                        const copyBtn = document.querySelector('.copy-btn');
+                        const originalHTML = copyBtn.innerHTML;
+                        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+                        copyBtn.style.color = 'var(--success)';
+                        
+                        setTimeout(() => {
+                            copyBtn.innerHTML = originalHTML;
+                            copyBtn.style.color = '';
+                        }, 2000);
+                    })
+                    .catch(err => console.error('Copy failed:', err));
+            };
+
+            // UPI app redirects
+            window.redirectToUpi = function(app) {
+                const urls = {
+                    gpay: `tez://upi/pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`,
+                    phonepe: `phonepe://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`,
+                    paytm: `paytmmp://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`,
+                    bhim: `bhim://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`
+                };
+                
+                if (urls[app]) {
+                    window.location.href = urls[app];
+                    setTimeout(() => {
+                        // Fallback to generic UPI
+                        if (!document.hasFocus()) {
+                            window.location.href = `upi://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`;
+                        }
+                    }, 1000);
+                }
+            };
+
+            // Manual instructions
+            window.showManualInstructions = function() {
+                alert(`Manual Payment Instructions:\n\n1. Open your UPI app (GPay, PhonePe, Paytm, etc.)\n2. Tap on "Scan QR Code"\n3. Scan the QR code above\n4. Enter amount: ₹${PAYMENT_CONFIG.amount}\n5. Complete the payment\n6. Save the transaction ID\n\nUPI ID: ${PAYMENT_CONFIG.upiId}`);
+            };
+
+            // Payment verification
+            window.verifyPayment = async function() {
+                const transactionId = document.getElementById('transaction-id').value.trim();
+                const verifyButton = document.querySelector('.verify-button');
+                const successMessage = document.getElementById('success-message');
+                const errorMessage = document.getElementById('error-message');
+                
+                // Hide previous messages
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+                
+                // Validate transaction ID
+                if (!transactionId) {
+                    showError('Please enter your transaction ID');
+                    return;
+                }
+                
+                // Validate format (basic UPI transaction ID pattern)
+                const transactionPatterns = [
+                    /^[A-Z0-9]{8,20}$/i,
+                    /^[A-Z]{3}[0-9]{10,15}$/i,
+                    /^[0-9]{12,16}$/,
+                    /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/i
+                ];
+                
+                const isValidFormat = transactionPatterns.some(pattern => pattern.test(transactionId));
+                if (!isValidFormat) {
+                    showError('Invalid transaction ID format. Please enter a valid UPI transaction ID.');
+                    return;
+                }
+                
+                // Show loading state
+                const originalText = verifyButton.innerHTML;
+                verifyButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+                verifyButton.disabled = true;
+                
+                try {
+                    // Simulate verification (replace with actual API call)
+                    await simulateVerification(transactionId);
+                    
+                    // Show success
+                    verifyButton.innerHTML = '<i class="fas fa-check-circle"></i> Verified!';
+                    verifyButton.style.background = 'linear-gradient(45deg, var(--success), #3aa83a)';
+                    verifyButton.disabled = true;
+                    
+                    successMessage.style.display = 'flex';
+                    
+                    // Save to localStorage
+                    localStorage.setItem('paymentVerified', 'true');
+                    localStorage.setItem('transactionId', transactionId);
+                    localStorage.setItem('paymentTime', new Date().toISOString());
+                    
+                    // Start countdown to redirect
+                    startRedirectCountdown();
+                    
+                } catch (error) {
+                    // Show error
+                    verifyButton.innerHTML = originalText;
+                    verifyButton.disabled = false;
+                    showError(error.message || 'Verification failed. Please try again.');
+                }
+            };
+
+            async function simulateVerification(transactionId) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        // Simulate 80% success rate for demo
+                        const isSuccess = Math.random() > 0.2;
+                        
+                        if (isSuccess) {
+                            resolve({
+                                success: true,
+                                transactionId,
+                                timestamp: new Date().toISOString()
+                            });
+                        } else {
+                            reject(new Error('Transaction ID not found. Please verify the ID and try again.'));
+                        }
+                    }, 2000);
+                });
+            }
+
+            function showError(message) {
+                const errorElement = document.getElementById('error-message');
+                errorElement.querySelector('p').textContent = message;
+                errorElement.style.display = 'flex';
+                errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            function startRedirectCountdown() {
+                let seconds = Math.floor(PAYMENT_CONFIG.successRedirectDelay / 1000);
+                const successMessage = document.getElementById('success-message');
+                
+                const countdownInterval = setInterval(() => {
+                    successMessage.querySelector('p').innerHTML = `
+                        <strong>Payment Verified Successfully!</strong><br>
+                        Your registration is now complete.<br>
+                        <small>Redirecting to homepage in ${seconds} seconds...</small>
+                    `;
+                    
+                    seconds--;
+                    
+                    if (seconds <= 0) {
+                        clearInterval(countdownInterval);
+                        window.location.href = 'index.html';
+                    }
+                }, 1000);
+            }
+        }
+
+        function addPaymentStyles() {
+            const style = document.createElement('style');
+            style.textContent = `
+                .payment-container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                }
+                
+                .payment-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2rem;
+                }
+                
+                @media (max-width: 992px) {
+                    .payment-grid {
+                        grid-template-columns: 1fr;
+                    }
+                }
+                
+                .qr-container {
+                    text-align: center;
+                }
+                
+                .qr-header {
+                    margin-bottom: 1.5rem;
+                }
+                
+                .qr-header h4 {
+                    color: var(--accent-yellow);
+                    margin-bottom: 0.5rem;
+                }
+                
+                .qr-header .amount {
+                    font-weight: bold;
+                    color: var(--success);
+                    font-size: 1.2rem;
+                }
+                
+                .qr-display {
+                    background: white;
+                    padding: 1rem;
+                    border-radius: var(--radius-sm);
+                    margin: 0 auto 1.5rem;
+                    width: 250px;
+                    height: 250px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                
+                .qr-placeholder {
+                    color: var(--text-secondary);
+                    text-align: center;
+                }
+                
+                .qr-placeholder i {
+                    margin-bottom: 1rem;
+                }
+                
+                .qr-error {
+                    color: var(--error);
+                    text-align: center;
+                }
+                
+                .upi-details {
+                    text-align: left;
+                    margin-top: 1.5rem;
+                    padding-top: 1.5rem;
+                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                }
+                
+                .upi-details h5 {
+                    color: var(--text);
+                    margin-bottom: 1rem;
+                    font-size: 1.1rem;
+                }
+                
+                .info-row {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 0.8rem;
+                    padding: 0.5rem;
+                    background: rgba(255, 255, 255, 0.03);
+                    border-radius: var(--radius-sm);
+                }
+                
+                .info-row .label {
+                    font-weight: 500;
+                    color: var(--text-secondary);
+                }
+                
+                .info-row .value {
+                    font-family: var(--font-mono);
+                    color: var(--text);
+                    font-weight: 500;
+                }
+                
+                .copy-btn {
+                    background: none;
+                    border: none;
+                    color: var(--accent-yellow);
+                    cursor: pointer;
+                    padding: 0.2rem 0.5rem;
+                    border-radius: var(--radius-sm);
+                    transition: all var(--transition-normal);
+                }
+                
+                .copy-btn:hover {
+                    background: rgba(255, 204, 0, 0.1);
+                }
+                
+                .payment-options {
+                    margin: 2rem 0;
+                }
+                
+                .option-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                }
+                
+                .payment-option {
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: var(--radius-sm);
+                    padding: 1rem;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: all var(--transition-normal);
+                }
+                
+                .payment-option:hover {
+                    background: rgba(255, 255, 255, 0.08);
+                    border-color: var(--accent-yellow);
+                    transform: translateY(-2px);
+                }
+                
+                .payment-option i {
+                    font-size: 2rem;
+                    margin-bottom: 0.5rem;
+                    color: var(--text);
+                }
+                
+                .payment-option span {
+                    display: block;
+                    font-size: 0.9rem;
+                    color: var(--text-secondary);
+                }
+                
+                .alt-methods {
+                    text-align: center;
+                    margin-top: 2rem;
+                }
+                
+                .separator {
+                    position: relative;
+                    text-align: center;
+                    color: var(--text-secondary);
+                    margin: 1.5rem 0;
+                }
+                
+                .separator::before {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    right: 0;
+                    height: 1px;
+                    background: rgba(255, 255, 255, 0.1);
+                }
+                
+                .separator span {
+                    background: var(--secondary);
+                    padding: 0 1rem;
+                    position: relative;
+                }
+                
+                .upi-redirect {
+                    width: 100%;
+                }
+                
+                .verification-section .card {
+                    height: 100%;
+                }
+                
+                .verification-header {
+                    margin-bottom: 1.5rem;
+                }
+                
+                .verification-header h4 {
+                    color: var(--accent-yellow);
+                    margin-bottom: 0.5rem;
+                }
+                
+                .transaction-form {
+                    margin-top: 1rem;
+                }
+                
+                .payment-instructions {
+                    margin-top: 2rem;
+                }
+                
+                .payment-instructions h5 {
+                    color: var(--accent-yellow);
+                    margin-bottom: 1rem;
+                }
+                
+                .instructions-list {
+                    padding-left: 1.5rem;
+                    color: var(--text-secondary);
+                }
+                
+                .instructions-list li {
+                    margin-bottom: 0.5rem;
+                }
+                
+                .payment-notice {
+                    background: linear-gradient(45deg, rgba(255, 204, 0, 0.05), transparent);
+                    border-left: 4px solid var(--accent-yellow);
+                }
+                
+                .notice-content {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 1.5rem;
+                }
+                
+                .notice-content i {
+                    flex-shrink: 0;
+                    margin-top: 0.5rem;
+                }
+                
+                .notice-content h4 {
+                    color: var(--accent-yellow);
+                    margin-bottom: 1rem;
+                }
+                
+                .notice-content ul {
+                    list-style: none;
+                    padding: 0;
+                }
+                
+                .notice-content li {
+                    margin-bottom: 0.5rem;
+                    color: var(--text-secondary);
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 0.5rem;
+                }
+                
+                .notice-content li::before {
+                    content: "•";
+                    color: var(--accent-yellow);
+                }
+                
+                .registration-summary {
+                    background: linear-gradient(45deg, rgba(15, 139, 255, 0.05), transparent);
+                    border-left: 4px solid var(--accent-blue);
+                }
+                
+                .summary-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1rem;
+                }
+                
+                .summary-header h4 {
+                    color: var(--accent-blue);
+                }
+                
+                .summary-details {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 1rem;
+                }
+                
+                .detail-item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0.8rem;
+                    background: rgba(255, 255, 255, 0.03);
+                    border-radius: var(--radius-sm);
+                }
+                
+                .detail-item .label {
+                    color: var(--text-secondary);
+                }
+                
+                .detail-item .value {
+                    font-weight: 500;
+                    color: var(--text);
+                }
+                
+                .amount {
+                    color: var(--success) !important;
+                    font-weight: bold;
+                }
+                
+                .status-badge {
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 2rem;
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                }
+                
+                .status-badge.pending {
+                    background: rgba(255, 165, 0, 0.1);
+                    color: var(--warning);
+                    border: 1px solid var(--warning);
+                }
+                
+                .status-badge.verified {
+                    background: rgba(75, 181, 67, 0.1);
+                    color: var(--success);
+                    border: 1px solid var(--success);
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+</body>
+</html>

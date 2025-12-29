@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo Arena - Free Fire Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="shortcut icon" href="../public/algo-arena.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                <a href="index.html#home">
+                    <h1>ALGO ARENA</h1>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#games" class="nav-link">Games</a></li>
+                <li><a href="index.html#rules" class="nav-link">Rules</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="valo.html" class="btn btn-secondary">Switch to Valorant</a></li>
+            </ul>
+            
+            <button class="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html#about" class="nav-link">About</a></li>
+            <li><a href="index.html#games" class="nav-link">Games</a></li>
+            <li><a href="index.html#rules" class="nav-link">Rules</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li><a href="valo.html" class="btn btn-secondary">Valorant</a></li>
+        </ul>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Registration Header -->
+    <section class="hero bg-secondary">
+        <div class="container">
+            <div class="form-header text-center">
+                <div class="game-logo mb-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1e/Free_fire_logo.svg/2560px-Free_fire_logo.svg.png" 
+                         alt="Free Fire Logo" style="height: 80px;">
+                </div>
+                <h2 class="section-title">Free Fire Tournament Registration</h2>
+                <p class="section-subtitle">
+                    Fill out the form below to register for upcoming Free Fire tournaments. 
+                    All fields are required unless marked optional.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section class="section">
+        <div class="container">
+            <div id="registration-summary" class="mb-5"></div>
+
+            <div class="form-messages">
+                <div id="successMessage" class="form-message success" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <div>Registration successful! We'll contact you soon with tournament details.</div>
+                </div>
+                
+                <div id="errorMessage" class="form-message error" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div>There was an error submitting your registration. Please try again.</div>
+                </div>
+            </div>
+
+            <div id="loadingSpinner" class="spinner mb-4" style="display: none;"></div>
+
+            <form id="freeFireForm" class="registration-form fade-in">
+                <!-- Personal Information -->
+                <h3 class="section-title">
+                    <i class="fas fa-user-circle"></i> Personal Information (IGL)
+                </h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="ff-fullname" class="required">Full Name</label>
+                        <input type="text" id="ff-fullname" name="fullname" 
+                               placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ff-email" class="required">Email Address</label>
+                        <input type="email" id="ff-email" name="email" 
+                               placeholder="you@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ff-phone" class="required">Phone Number</label>
+                        <input type="tel" id="ff-phone" name="phone" 
+                               placeholder="+91 9876543210" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ff-country" class="required">Country</label>
+                        <select id="ff-country" name="country" required>
+                            <option value="">Select Country</option>
+                            <option value="IN">India</option>
+                            <option value="US">United States</option>
+                            <option value="BR">Brazil</option>
+                            <option value="ID">Indonesia</option>
+                            <option value="PK">Pakistan</option>
+                            <option value="BD">Bangladesh</option>
+                            <option value="VN">Vietnam</option>
+                            <option value="TH">Thailand</option>
+                            <option value="RU">Russia</option>
+                            <option value="TR">Turkey</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Team Information -->
+                <h3 class="section-title">
+                    <i class="fas fa-users"></i> Team Information
+                </h3>
+                <div class="form-group">
+                    <label for="ff-teamname" class="required">Team Name</label>
+                    <input type="text" id="ff-teamname" name="team_name" 
+                           placeholder="Enter your team name" required>
+                    <span class="help-text">Make it unique and memorable!</span>
+                </div>
+
+                <div class="players-grid">
+                    <!-- Player 1 -->
+                    <div class="player-section card mb-4">
+                        <h4><i class="fas fa-crown text-gradient"></i> Player 1 (Captain)</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="player1-name" class="required">In-Game Name</label>
+                                <input type="text" id="player1-name" name="player1_name" 
+                                       placeholder="Enter IGN" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="player1-uid" class="required">Free Fire UID</label>
+                                <input type="text" id="player1-uid" name="player1_uid" 
+                                       placeholder="Enter 8-12 digit UID" required>
+                                <span class="help-text">Found in your profile (8-12 digits)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Player 2 -->
+                    <div class="player-section card mb-4">
+                        <h4><i class="fas fa-user text-gradient"></i> Player 2</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="player2-name" class="required">In-Game Name</label>
+                                <input type="text" id="player2-name" name="player2_name" 
+                                       placeholder="Enter IGN" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="player2-uid" class="required">Free Fire UID</label>
+                                <input type="text" id="player2-uid" name="player2_uid" 
+                                       placeholder="Enter 8-12 digit UID" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Player 3 -->
+                    <div class="player-section card mb-4">
+                        <h4><i class="fas fa-user text-gradient"></i> Player 3</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="player3-name" class="required">In-Game Name</label>
+                                <input type="text" id="player3-name" name="player3_name" 
+                                       placeholder="Enter IGN" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="player3-uid" class="required">Free Fire UID</label>
+                                <input type="text" id="player3-uid" name="player3_uid" 
+                                       placeholder="Enter 8-12 digit UID" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Player 4 -->
+                    <div class="player-section card mb-4">
+                        <h4><i class="fas fa-user text-gradient"></i> Player 4</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="player4-name" class="required">In-Game Name</label>
+                                <input type="text" id="player4-name" name="player4_name" 
+                                       placeholder="Enter IGN" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="player4-uid" class="required">Free Fire UID</label>
+                                <input type="text" id="player4-uid" name="player4_uid" 
+                                       placeholder="Enter 8-12 digit UID" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Optional Players -->
+                    <div class="optional-players">
+                        <h5 class="mb-3"><i class="fas fa-user-plus text-gradient"></i> Optional Players (Substitutes)</h5>
+                        
+                        <!-- Player 5 -->
+                        <div class="player-section card mb-4">
+                            <h6>Player 5 (Substitute)</h6>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="player5-name">In-Game Name</label>
+                                    <input type="text" id="player5-name" name="player5_name" 
+                                           placeholder="Enter IGN (optional)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="player5-uid">Free Fire UID</label>
+                                    <input type="text" id="player5-uid" name="player5_uid" 
+                                           placeholder="Enter UID (optional)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Player 6 -->
+                        <div class="player-section card">
+                            <h6>Player 6 (Substitute)</h6>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="player6-name">In-Game Name</label>
+                                    <input type="text" id="player6-name" name="player6_name" 
+                                           placeholder="Enter IGN (optional)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="player6-uid">Free Fire UID</label>
+                                    <input type="text" id="player6-uid" name="player6_uid" 
+                                           placeholder="Enter UID (optional)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tournament Preferences -->
+                <h3 class="section-title">
+                    <i class="fas fa-trophy"></i> Tournament Preferences
+                </h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="mb-3">Preferred Tournament Types</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="ff-squad" name="tournament_types[]" value="squad" checked>
+                            <label for="ff-squad">Squad (4v4)</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="ff-duo" name="tournament_types[]" value="duo">
+                            <label for="ff-duo">Duo</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="ff-solo" name="tournament_types[]" value="solo">
+                            <label for="ff-solo">Solo</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="ff-clash" name="tournament_types[]" value="clash_squad">
+                            <label for="ff-clash">Clash Squad</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ff-timezone">Preferred Time Zone</label>
+                        <select id="ff-timezone" name="timezone">
+                            <option value="">Select Time Zone</option>
+                            <option value="IST">IST (India)</option>
+                            <option value="UTC">UTC (Universal)</option>
+                            <option value="EST">EST (US East)</option>
+                            <option value="PST">PST (US West)</option>
+                            <option value="CET">CET (Europe)</option>
+                            <option value="BRT">BRT (Brazil)</option>
+                            <option value="SGT">SGT (Singapore)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="form-group terms-section">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="ff-terms" name="terms" required>
+                        <label for="ff-terms">
+                            I agree to the <a href="#terms" target="_blank">tournament rules</a> and <a href="#privacy" target="_blank">code of conduct</a>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary form-submit">
+                        <i class="fas fa-paper-plane"></i> Proceed to Payment
+                    </button>
+                    <button type="reset" class="btn btn-outline form-reset">
+                        <i class="fas fa-redo"></i> Reset Form
+                    </button>
+                </div>
+            </form>
+
+            <!-- Payment Info Notice -->
+            <div class="card mt-5 info-notice">
+                <div class="info-content">
+                    <i class="fas fa-info-circle fa-2x text-gradient"></i>
+                    <div>
+                        <h4>Registration Fee</h4>
+                        <p>After submitting this form, you'll be redirected to the payment page to complete your registration with a fee of ₹20 per team.</p>
+                        <p class="small">Note: Payment is required to secure your spot in the tournament.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                    <h3>ALGO ARENA</h3>
+                </div>
+                <p>Professional Free Fire tournaments platform.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#rules">Rules</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="valo.html">Valorant</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="mailto:support@algoarena.com">Email Support</a></li>
+                    <li><a href="https://discord.gg/algoarena" target="_blank">Discord</a></li>
+                    <li><a href="https://twitter.com/algoarena" target="_blank">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="copyright">© <span id="current-year">2025</span> Algo Arena. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="../js/supabaseClient.js"></script>
+    <script src="../js/freefire.js"></script>
+    <script>
+        // Additional Free Fire specific JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // UID validation helper
+            const uidInputs = document.querySelectorAll('input[id$="-uid"]');
+            uidInputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    const value = this.value.trim();
+                    if (value && !/^\d{8,12}$/.test(value)) {
+                        showFieldError(this, 'UID must be 8-12 digits');
+                    }
+                });
+            });
+
+            // Player name suggestions for team name
+            const player1Input = document.getElementById('player1-name');
+            const teamNameInput = document.getElementById('ff-teamname');
+            
+            if (player1Input && teamNameInput) {
+                player1Input.addEventListener('blur', function() {
+                    if (!teamNameInput.value) {
+                        const name = this.value.trim().split(' ')[0];
+                        if (name) {
+                            teamNameInput.value = name + '_Squad';
+                        }
+                    }
+                });
+            }
+
+            // Add CSS for Free Fire specific styling
+            const style = document.createElement('style');
+            style.textContent = `
+                .players-grid {
+                    margin: 2rem 0;
+                }
+                
+                .player-section {
+                    border-left: 4px solid var(--accent-yellow);
+                }
+                
+                .player-section h4, .player-section h6 {
+                    color: var(--accent-yellow);
+                    margin-bottom: 1rem;
+                }
+                
+                .optional-players {
+                    margin-top: 2rem;
+                    padding-top: 1.5rem;
+                    border-top: 2px dashed rgba(255, 255, 255, 0.1);
+                }
+                
+                .info-notice {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5rem;
+                    background: linear-gradient(45deg, rgba(255, 204, 0, 0.05), transparent);
+                    border-left: 4px solid var(--accent-yellow);
+                }
+                
+                .info-notice i {
+                    flex-shrink: 0;
+                }
+                
+                .info-notice h4 {
+                    color: var(--accent-yellow);
+                    margin-bottom: 0.5rem;
+                }
+                
+                .info-notice p.small {
+                    font-size: 0.9rem;
+                    opacity: 0.8;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        function showFieldError(field, message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+            
+            const parent = field.parentElement;
+            const existingError = parent.querySelector('.error-message');
+            if (existingError) existingError.remove();
+            
+            parent.appendChild(errorDiv);
+            field.classList.add('error');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo Arena - Valorant Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="shortcut icon" href="../public/algo-arena.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                <a href="index.html#home">
+                    <h1>ALGO ARENA</h1>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#games" class="nav-link">Games</a></li>
+                <li><a href="index.html#rules" class="nav-link">Rules</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="free-fire.html" class="btn btn-primary">Switch to Free Fire</a></li>
+            </ul>
+            
+            <button class="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html#about" class="nav-link">About</a></li>
+            <li><a href="index.html#games" class="nav-link">Games</a></li>
+            <li><a href="index.html#rules" class="nav-link">Rules</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li><a href="free-fire.html" class="btn btn-primary">Free Fire</a></li>
+        </ul>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Registration Header -->
+    <section class="hero bg-secondary">
+        <div class="container">
+            <div class="form-header text-center">
+                <div class="game-logo mb-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Valorant_logo_-_pink_color_version.svg/2560px-Valorant_logo_-_pink_color_version.svg.png" 
+                         alt="Valorant Logo" style="height: 80px;">
+                </div>
+                <h2 class="section-title">Valorant Tournament Registration</h2>
+                <p class="section-subtitle">
+                    Fill out the form below to register for upcoming Valorant tournaments. 
+                    All fields are required unless marked optional.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section class="section">
+        <div class="container">
+            <div id="registration-summary" class="mb-5"></div>
+
+            <div class="form-messages">
+                <div id="successMessage" class="form-message success" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <div>Registration successful! Redirecting to payment...</div>
+                </div>
+                
+                <div id="errorMessage" class="form-message error" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div>There was an error submitting your registration. Please try again.</div>
+                </div>
+            </div>
+
+            <div id="loadingSpinner" class="spinner mb-4" style="display: none;"></div>
+
+            <form id="valorantForm" class="registration-form fade-in">
+                <!-- Personal Information -->
+                <h3 class="section-title">
+                    <i class="fas fa-user-circle"></i> Personal Information (IGL)
+                </h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="val-fullname" class="required">Full Name</label>
+                        <input type="text" id="val-fullname" name="fullname" 
+                               placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="val-email" class="required">Email Address</label>
+                        <input type="email" id="val-email" name="email" 
+                               placeholder="you@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="val-phone" class="required">Phone Number</label>
+                        <input type="tel" id="val-phone" name="phone" 
+                               placeholder="+91 9876543210" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="val-country" class="required">Country</label>
+                        <select id="val-country" name="country" required>
+                            <option value="">Select Country</option>
+                            <option value="US">United States</option>
+                            <option value="KR">South Korea</option>
+                            <option value="BR">Brazil</option>
+                            <option value="EU">European Union</option>
+                            <option value="IN">India</option>
+                            <option value="JP">Japan</option>
+                            <option value="SG">Singapore</option>
+                            <option value="AU">Australia</option>
+                            <option value="CA">Canada</option>
+                            <option value="MX">Mexico</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Team Information -->
+                <h3 class="section-title">
+                    <i class="fas fa-users"></i> Team Information
+                </h3>
+                <div class="form-group">
+                    <label for="val-teamname">Team Name</label>
+                    <input type="text" id="val-teamname" name="team_name" 
+                           placeholder="Enter your team name (optional)">
+                    <span class="help-text">Leave blank for individual registration</span>
+                </div>
+
+                <div class="players-grid">
+                    <!-- Player 1 -->
+                    <div class="player-section card mb-4">
+                        <h4><i class="fas fa-crown text-gradient"></i> Player 1 (Captain)</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="player1-name" class="required">In-Game Name</label>
+                                <input type="text" id="player1-name" name="player1_name" 
+                                       placeholder="Enter IGN" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="player1-riotid" class="required">Riot ID (with Tag)</label>
+                                <input type="text" id="player1-riotid" name="player1_riotid" 
+                                       placeholder="e.g., AlgoArena#1234" required>
+                                <span class="help-text">Format: Name#Tag (found in your Riot account)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Player 2 -->
+                    <div class="player-section card mb-4">
+                        <h4><i class="fas fa-user text-gradient"></i> Player 2</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="player2-name" class="required">In-Game Name</label>
+                                <input type="text" id="player2-name" name="player2_name" 
+                                       placeholder="Enter IGN" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="player2-riotid" class="required">Riot ID (with Tag)</label>
+                                <input type="text" id="player2-riotid" name="player2_riotid" 
+                                       placeholder="e.g., AlgoArena#1234" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Player 3 -->
+                    <div class="player-section card mb-4">
+                        <h4><i class="fas fa-user text-gradient"></i> Player 3</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="player3-name" class="required">In-Game Name</label>
+                                <input type="text" id="player3-name" name="player3_name" 
+                                       placeholder="Enter IGN" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="player3-riotid" class="required">Riot ID (with Tag)</label>
+                                <input type="text" id="player3-riotid" name="player3_riotid" 
+                                       placeholder="e.g., AlgoArena#1234" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Player 4 -->
+                    <div class="player-section card mb-4">
+                        <h4><i class="fas fa-user text-gradient"></i> Player 4</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="player4-name" class="required">In-Game Name</label>
+                                <input type="text" id="player4-name" name="player4_name" 
+                                       placeholder="Enter IGN" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="player4-riotid" class="required">Riot ID (with Tag)</label>
+                                <input type="text" id="player4-riotid" name="player4_riotid" 
+                                       placeholder="e.g., AlgoArena#1234" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Player 5 -->
+                    <div class="player-section card mb-4">
+                        <h4><i class="fas fa-user text-gradient"></i> Player 5</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="player5-name" class="required">In-Game Name</label>
+                                <input type="text" id="player5-name" name="player5_name" 
+                                       placeholder="Enter IGN" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="player5-riotid" class="required">Riot ID (with Tag)</label>
+                                <input type="text" id="player5-riotid" name="player5_riotid" 
+                                       placeholder="e.g., AlgoArena#1234" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Optional Players -->
+                    <div class="optional-players">
+                        <h5 class="mb-3"><i class="fas fa-user-plus text-gradient"></i> Optional Players (Substitutes)</h5>
+                        
+                        <!-- Player 6 -->
+                        <div class="player-section card mb-4">
+                            <h6>Player 6 (Substitute)</h6>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="player6-name">In-Game Name</label>
+                                    <input type="text" id="player6-name" name="player6_name" 
+                                           placeholder="Enter IGN (optional)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="player6-riotid">Riot ID (with Tag)</label>
+                                    <input type="text" id="player6-riotid" name="player6_riotid" 
+                                           placeholder="e.g., AlgoArena#1234 (optional)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Player 7 -->
+                        <div class="player-section card">
+                            <h6>Player 7 (Substitute)</h6>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="player7-name">In-Game Name</label>
+                                    <input type="text" id="player7-name" name="player7_name" 
+                                           placeholder="Enter IGN (optional)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="player7-riotid">Riot ID (with Tag)</label>
+                                    <input type="text" id="player7-riotid" name="player7_riotid" 
+                                           placeholder="e.g., AlgoArena#1234 (optional)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tournament Preferences -->
+                <h3 class="section-title">
+                    <i class="fas fa-trophy"></i> Tournament Preferences
+                </h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="mb-3">Preferred Tournament Types</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="val-premier" name="tournament_types[]" value="premier" checked>
+                            <label for="val-premier">Premier</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="val-open" name="tournament_types[]" value="open_qualifiers">
+                            <label for="val-open">Open Qualifiers</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="val-inhouse" name="tournament_types[]" value="inhouse_scrims">
+                            <label for="val-inhouse">In-House Scrims</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="val-ranked" name="tournament_types[]" value="ranked_tournament">
+                            <label for="val-ranked">Ranked Tournament</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="val-custom" name="tournament_types[]" value="custom_tournament">
+                            <label for="val-custom">Custom Tournament</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="val-server" class="required">Preferred Server</label>
+                        <select id="val-server" name="server" required>
+                            <option value="">Select Server</option>
+                            <option value="na">North America</option>
+                            <option value="eu">Europe</option>
+                            <option value="kr">Korea</option>
+                            <option value="br">Brazil</option>
+                            <option value="ap">Asia Pacific</option>
+                            <option value="latam">Latin America</option>
+                            <option value="sea">Southeast Asia</option>
+                            <option value="mena">Middle East</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="val-rating">Current Rank</label>
+                        <select id="val-rating" name="current_rank">
+                            <option value="">Select Rank</option>
+                            <option value="iron">Iron</option>
+                            <option value="bronze">Bronze</option>
+                            <option value="silver">Silver</option>
+                            <option value="gold">Gold</option>
+                            <option value="platinum">Platinum</option>
+                            <option value="diamond">Diamond</option>
+                            <option value="ascendant">Ascendant</option>
+                            <option value="immortal">Immortal</option>
+                            <option value="radiant">Radiant</option>
+                        </select>
+                        <span class="help-text">For balanced matchmaking</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="val-playstyle">Preferred Playstyle</label>
+                        <select id="val-playstyle" name="playstyle" multiple>
+                            <option value="controller">Controller</option>
+                            <option value="duelist">Duelist</option>
+                            <option value="initiator">Initiator</option>
+                            <option value="sentinel">Sentinel</option>
+                            <option value="flex">Flex</option>
+                        </select>
+                        <span class="help-text">Hold Ctrl/Cmd to select multiple</span>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="form-group terms-section">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="val-terms" name="terms" required>
+                        <label for="val-terms">
+                            I agree to the <a href="#terms" target="_blank">tournament rules</a> and <a href="#privacy" target="_blank">code of conduct</a>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-secondary form-submit">
+                        <i class="fas fa-paper-plane"></i> Register for Valorant Tournaments
+                    </button>
+                    <button type="reset" class="btn btn-outline form-reset">
+                        <i class="fas fa-redo"></i> Reset Form
+                    </button>
+                </div>
+            </form>
+
+            <!-- Payment Info Notice -->
+            <div class="card mt-5 info-notice">
+                <div class="info-content">
+                    <i class="fas fa-info-circle fa-2x text-gradient"></i>
+                    <div>
+                        <h4>Registration Fee</h4>
+                        <p>After submitting this form, you'll be redirected to the payment page to complete your registration with a fee of ₹20 per team.</p>
+                        <p class="small">Note: Payment is required to secure your spot in the tournament.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                    <h3>ALGO ARENA</h3>
+                </div>
+                <p>Professional Valorant tournaments platform.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#rules">Rules</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="free-fire.html">Free Fire</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="mailto:support@algoarena.com">Email Support</a></li>
+                    <li><a href="https://discord.gg/algoarena" target="_blank">Discord</a></li>
+                    <li><a href="https://twitter.com/algoarena" target="_blank">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="copyright">© <span id="current-year">2025</span> Algo Arena. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="../js/supabaseClient.js"></script>
+    <script src="../js/valorant.js"></script>
+    <script>
+        // Additional Valorant specific JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Riot ID validation helper
+            const riotIdInputs = document.querySelectorAll('input[id$="-riotid"]');
+            riotIdInputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    const value = this.value.trim();
+                    if (value && !/^[\w\s]+#[\w\d]+$/.test(value)) {
+                        showFieldError(this, 'Format: Name#Tag (e.g., AlgoArena#1234)');
+                    }
+                });
+            });
+
+            // Team name auto-generation
+            const player1Input = document.getElementById('player1-name');
+            const teamNameInput = document.getElementById('val-teamname');
+            
+            if (player1Input && teamNameInput) {
+                player1Input.addEventListener('blur', function() {
+                    if (!teamNameInput.value) {
+                        const name = this.value.trim().split(' ')[0];
+                        if (name) {
+                            teamNameInput.value = name + '_Legion';
+                        }
+                    }
+                });
+            }
+
+            // Rank selector styling
+            const rankSelect = document.getElementById('val-rating');
+            if (rankSelect) {
+                rankSelect.addEventListener('change', function() {
+                    const colors = {
+                        'iron': '#939393',
+                        'bronze': '#CD7F32',
+                        'silver': '#C0C0C0',
+                        'gold': '#FFD700',
+                        'platinum': '#00CED1',
+                        'diamond': '#B9F2FF',
+                        'ascendant': '#9400D3',
+                        'immortal': '#DC143C',
+                        'radiant': '#FF4500'
+                    };
+                    
+                    if (colors[this.value]) {
+                        this.style.color = colors[this.value];
+                        this.style.borderColor = colors[this.value];
+                    } else {
+                        this.style.color = '';
+                        this.style.borderColor = '';
+                    }
+                });
+            }
+
+            // Add CSS for Valorant specific styling
+            const style = document.createElement('style');
+            style.textContent = `
+                .players-grid {
+                    margin: 2rem 0;
+                }
+                
+                .player-section {
+                    border-left: 4px solid var(--accent-red);
+                }
+                
+                .player-section h4, .player-section h6 {
+                    color: var(--accent-red);
+                    margin-bottom: 1rem;
+                }
+                
+                .optional-players {
+                    margin-top: 2rem;
+                    padding-top: 1.5rem;
+                    border-top: 2px dashed rgba(255, 255, 255, 0.1);
+                }
+                
+                .info-notice {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5rem;
+                    background: linear-gradient(45deg, rgba(255, 70, 85, 0.05), transparent);
+                    border-left: 4px solid var(--accent-red);
+                }
+                
+                .info-notice i {
+                    flex-shrink: 0;
+                }
+                
+                .info-notice h4 {
+                    color: var(--accent-red);
+                    margin-bottom: 0.5rem;
+                }
+                
+                .info-notice p.small {
+                    font-size: 0.9rem;
+                    opacity: 0.8;
+                }
+                
+                select[multiple] option:hover {
+                    background-color: var(--accent-red) !important;
+                }
+                
+                .btn-secondary {
+                    background: linear-gradient(45deg, var(--accent-red), #ff2e4a);
+                }
+                
+                .btn-secondary:hover {
+                    background: linear-gradient(45deg, #ff2e4a, var(--accent-red));
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        function showFieldError(field, message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+            
+            const parent = field.parentElement;
+            const existingError = parent.querySelector('.error-message');
+            if (existingError) existingError.remove();
+            
+            parent.appendChild(errorDiv);
+            field.classList.add('error');
+        }
+    </script>
+</body>
+</html>

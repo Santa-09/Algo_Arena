@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo Arena - Premium Esports Tournaments</title>
+    <link rel="shortcut icon" href="../public/algo-arena.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                <a href="#home">
+                    <h1>ALGO ARENA</h1>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#games" class="nav-link">Games</a></li>
+                <li><a href="#rules" class="nav-link">Rules</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="free-fire.html" class="btn btn-primary">Free Fire</a></li>
+                <li><a href="valo.html" class="btn btn-secondary">Valorant</a></li>
+            </ul>
+            
+            <button class="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#games" class="nav-link">Games</a></li>
+            <li><a href="#rules" class="nav-link">Rules</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li><a href="free-fire.html" class="btn btn-primary">Free Fire</a></li>
+            <li><a href="valo.html" class="btn btn-secondary">Valorant</a></li>
+        </ul>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="hero-title fade-in">Compete. Win. Dominate.</h1>
+            <p class="hero-description fade-in">
+                Join the most thrilling esports tournaments with massive prize pools and professional organization. 
+                Whether you're a casual player or aspiring pro, Algo Arena is your battlefield.
+            </p>
+            <div class="hero-actions fade-in">
+                <a href="#games" class="btn btn-primary mr-2">View Tournaments</a>
+                <a href="free-fire.html" class="btn btn-outline">Register Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section bg-secondary" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Algo Arena</h2>
+                <p class="section-subtitle">
+                    Premier esports tournament platform dedicated to providing competitive gamers with 
+                    professionally organized tournaments, fair play environments, and substantial rewards.
+                </p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="card slide-left">
+                    <i class="fas fa-trophy fa-3x text-gradient mb-3"></i>
+                    <h3>Professional Organization</h3>
+                    <p>Our tournaments follow strict competitive rules with experienced admins ensuring fair play.</p>
+                </div>
+                
+                <div class="card slide-left stagger-1">
+                    <i class="fas fa-gem fa-3x text-gradient mb-3"></i>
+                    <h3>Substantial Prizes</h3>
+                    <p>Compete for cash prizes, gaming gear, and in-game items worth thousands of dollars.</p>
+                </div>
+                
+                <div class="card slide-right stagger-2">
+                    <i class="fas fa-users fa-3x text-gradient mb-3"></i>
+                    <h3>Community Focus</h3>
+                    <p>Join a growing community of competitive gamers and make connections that last.</p>
+                </div>
+                
+                <div class="card slide-right stagger-3">
+                    <i class="fas fa-calendar-alt fa-3x text-gradient mb-3"></i>
+                    <h3>Regular Events</h3>
+                    <p>Weekly and monthly tournaments to keep the competition fresh and exciting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section class="section" id="games">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Games</h2>
+                <p class="section-subtitle">
+                    Choose your battlefield and compete against the best players in these thrilling esports titles
+                </p>
+            </div>
+            
+            <div class="games-grid">
+                <div class="game-card free-fire scale-in">
+                    <div class="game-overlay"></div>
+                    <div class="game-content">
+                        <h3><i class="fas fa-fire"></i> Free Fire</h3>
+                        <p>Battle royale action at its finest. Compete in squad tournaments with massive prize pools.</p>
+                        <a href="free-fire.html" class="btn btn-primary">Register Now</a>
+                    </div>
+                </div>
+                
+                <div class="game-card valorant scale-in">
+                    <div class="game-overlay"></div>
+                    <div class="game-content">
+                        <h3><i class="fas fa-crosshairs"></i> Valorant</h3>
+                        <p>Tactical 5v5 shooter competition. Test your skills in our ranked tournament series.</p>
+                        <a href="valo.html" class="btn btn-secondary">Register Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section class="section bg-secondary" id="rules">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tournament Rules</h2>
+                <p class="section-subtitle">
+                    To ensure fair and competitive gameplay, all participants must adhere to these rules and restrictions
+                </p>
+            </div>
+            
+            <div class="rules-grid">
+                <div class="card stagger-fade stagger-1">
+                    <h4><i class="fas fa-clipboard-check text-gradient"></i> General Rules</h4>
+                    <ul>
+                        <li>All players must be registered with valid game IDs</li>
+                        <li>No account sharing or smurfing allowed</li>
+                        <li>Teams must report 15 minutes before match time</li>
+                        <li>Decisions by tournament admins are final</li>
+                    </ul>
+                </div>
+                
+                <div class="card stagger-fade stagger-2">
+                    <h4><i class="fas fa-fire text-gradient"></i> Free Fire Specific</h4>
+                    <ul>
+                        <li>Squad format (4 players per team)</li>
+                        <li>Custom room matches</li>
+                        <li>No use of prohibited emulators</li>
+                        <li>Points system based on kills and placement</li>
+                    </ul>
+                </div>
+                
+                <div class="card stagger-fade stagger-3">
+                    <h4><i class="fas fa-crosshairs text-gradient"></i> Valorant Specific</h4>
+                    <ul>
+                        <li>5v5 competitive format</li>
+                        <li>Best-of-three matches (Finals: best-of-five)</li>
+                        <li>Map veto system in place</li>
+                        <li>No exploit or bug abuse allowed</li>
+                    </ul>
+                </div>
+                
+                <div class="card stagger-fade stagger-4">
+                    <h4><i class="fas fa-users-cog text-gradient"></i> Code of Conduct</h4>
+                    <ul>
+                        <li>No toxic behavior or harassment</li>
+                        <li>No cheating or third-party software</li>
+                        <li>Respect all players and staff</li>
+                        <li>Violations result in permanent bans</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">
+                    Have questions about our tournaments or need support? Our team is ready to help you 24/7
+                </p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="card slide-left">
+                    <h3><i class="fas fa-envelope text-gradient"></i> Email Support</h3>
+                    <p>support@algoarena.com</p>
+                    <p>tournaments@algoarena.com</p>
+                </div>
+                
+                <div class="card slide-right">
+                    <h3><i class="fas fa-headset text-gradient"></i> Live Support</h3>
+                    <p>Available 24/7 on our Discord server</p>
+                    <div class="social-links">
+                        <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="contact.html" class="btn btn-primary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                    <h3>ALGO ARENA</h3>
+                </div>
+                <p>Professional esports tournament platform for competitive gamers.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#games">Games</a></li>
+                    <li><a href="#rules">Rules</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Tournaments</h4>
+                <ul>
+                    <li><a href="free-fire.html">Free Fire</a></li>
+                    <li><a href="valo.html">Valorant</a></li>
+                    <li><a href="payment.html">Payment</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="copyright">© <span id="current-year">2025</span> Algo Arena. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/supabaseClient.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
