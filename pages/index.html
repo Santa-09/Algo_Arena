@@ -1,38 +1,1242 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algo Arena - Premium Esports Tournaments</title>
-    <link rel="shortcut icon" href="../public/algo-arena.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./public/algo-arena.png" type="image/x-icon">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/animations.css">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            /* Color Palette */
+            --primary: #0f0f23;
+            --secondary: #1a1a2e;
+            --accent-blue: #0f8bff;
+            --accent-red: #ff4655;
+            --accent-yellow: #ffcc00;
+            --accent-green: #00ff88;
+            --success: #4bb543;
+            --warning: #ffa500;
+            --error: #ff3333;
+            
+            /* Text Colors */
+            --text: #ffffff;
+            --text-secondary: #b0b0c0;
+            --text-muted: #888899;
+            
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-xxl: 3rem;
+            
+            /* Typography */
+            --font-primary: 'Poppins', sans-serif;
+            --font-mono: 'Courier New', monospace;
+            
+            /* Font Sizes */
+            --fs-xs: 0.75rem;
+            --fs-sm: 0.875rem;
+            --fs-base: 1rem;
+            --fs-md: 1.125rem;
+            --fs-lg: 1.25rem;
+            --fs-xl: 1.5rem;
+            --fs-xxl: 2rem;
+            --fs-xxxl: 3rem;
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-round: 50%;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.4);
+            
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--accent-blue), #4654ff);
+            --gradient-secondary: linear-gradient(135deg, var(--accent-red), #ff2e4a);
+            --gradient-dark: linear-gradient(135deg, var(--primary), #1a1a2e);
+            --gradient-glow: radial-gradient(circle at center, rgba(15, 139, 255, 0.15), transparent 70%);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(15, 139, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 70, 85, 0.05) 0%, transparent 50%);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+        }
+
+        h1 { font-size: var(--fs-xxxl); }
+        h2 { font-size: var(--fs-xxl); }
+        h3 { font-size: var(--fs-xl); }
+        h4 { font-size: var(--fs-lg); }
+        h5 { font-size: var(--fs-md); }
+        h6 { font-size: var(--fs-base); }
+
+        p {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        a:hover {
+            color: var(--accent-yellow);
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+
+        .text-gradient {
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-yellow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mb-1 { margin-bottom: var(--spacing-xs); }
+        .mb-2 { margin-bottom: var(--spacing-sm); }
+        .mb-3 { margin-bottom: var(--spacing-md); }
+        .mb-4 { margin-bottom: var(--spacing-lg); }
+        .mb-5 { margin-bottom: var(--spacing-xl); }
+
+        .mt-1 { margin-top: var(--spacing-xs); }
+        .mt-2 { margin-top: var(--spacing-sm); }
+        .mt-3 { margin-top: var(--spacing-md); }
+        .mt-4 { margin-top: var(--spacing-lg); }
+        .mt-5 { margin-top: var(--spacing-xl); }
+
+        .mr-1 { margin-right: var(--spacing-xs); }
+        .mr-2 { margin-right: var(--spacing-sm); }
+        .mr-3 { margin-right: var(--spacing-md); }
+
+        .ml-1 { margin-left: var(--spacing-xs); }
+        .ml-2 { margin-left: var(--spacing-sm); }
+        .ml-3 { margin-left: var(--spacing-md); }
+
+        .p-1 { padding: var(--spacing-xs); }
+        .p-2 { padding: var(--spacing-sm); }
+        .p-3 { padding: var(--spacing-md); }
+        .p-4 { padding: var(--spacing-lg); }
+        .p-5 { padding: var(--spacing-xl); }
+
+        .flex { display: flex; }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flex-between {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .flex-column { flex-direction: column; }
+        .flex-wrap { flex-wrap: wrap; }
+
+        .grid { display: grid; }
+
+        .w-100 { width: 100%; }
+        .h-100 { height: 100%; }
+
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--fs-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left var(--transition-normal);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent-blue), #4654ff);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--accent-red), #ff2e4a);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--text-secondary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-yellow);
+            color: var(--accent-yellow);
+            transform: translateY(-2px);
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: var(--fs-xs);
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: var(--fs-md);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-sm) 0;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .nav-brand img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-brand h1 {
+            font-size: var(--fs-lg);
+            margin: 0;
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-yellow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            position: relative;
+            padding: var(--spacing-sm) 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-yellow));
+            transition: width var(--transition-normal);
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--spacing-sm);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+            transition: all var(--transition-normal);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: var(--secondary);
+            z-index: 1001;
+            transition: right var(--transition-normal);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu .nav-menu {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--spacing-lg);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: var(--spacing-xl) 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-glow);
+            opacity: 0.5;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(45deg, var(--accent-blue), var(--accent-yellow));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        .hero-description {
+            font-size: var(--fs-lg);
+            max-width: 800px;
+            margin: 0 auto var(--spacing-xl);
+            color: var(--text-secondary);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(15, 139, 255, 0.3);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(15, 139, 255, 0.6),
+                            0 0 30px rgba(255, 204, 0, 0.4);
+            }
+        }
+
+        /* Sections */
+        .section {
+            padding: var(--spacing-xxl) 0;
+            position: relative;
+        }
+
+        .section.bg-secondary {
+            background: var(--secondary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xxl);
+        }
+
+        .section-title {
+            font-size: var(--fs-xxl);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-yellow));
+        }
+
+        .section-subtitle {
+            font-size: var(--fs-lg);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all var(--transition-normal);
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* About Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .about-grid .card {
+            text-align: center;
+        }
+
+        .about-grid i {
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .game-card {
+            position: relative;
+            height: 300px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), transparent);
+            z-index: 1;
+        }
+
+        .game-content {
+            position: relative;
+            z-index: 2;
+            padding: var(--spacing-xl);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+        }
+
+        .game-card.free-fire {
+            background: linear-gradient(45deg, #ff9500, #ff2e00);
+        }
+
+        .game-card.valorant {
+            background: linear-gradient(45deg, #ff4655, #0f8bff);
+        }
+
+        .game-card h3 {
+            font-size: var(--fs-xxl);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .game-card p {
+            margin-bottom: var(--spacing-xl);
+            font-size: var(--fs-md);
+        }
+
+        /* Rules Grid */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .rules-grid .card h4 {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .rules-grid ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .rules-grid li {
+            padding: var(--spacing-xs) 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: var(--spacing-md);
+        }
+
+        .rules-grid li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-yellow);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary);
+            padding: var(--spacing-xxl) 0 var(--spacing-xl);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-xl);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .footer-links h4 {
+            font-size: var(--fs-md);
+            margin-bottom: var(--spacing-lg);
+            color: var(--text);
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .footer-bottom {
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: var(--fs-sm);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .footer-social a {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: all var(--transition-normal);
+        }
+
+        .footer-social a:hover {
+            color: var(--accent-yellow);
+            transform: translateY(-3px);
+        }
+
+        .disclaimer {
+            color: var(--text-muted);
+            font-size: var(--fs-xs);
+            margin-top: var(--spacing-sm);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideLeft 0.8s ease forwards;
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideRight 0.8s ease forwards;
+        }
+
+        @keyframes slideLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            animation: scaleIn 0.6s ease forwards;
+        }
+
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .stagger-fade {
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+
+        /* HELP SECTION STYLES */
+        .help-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .help-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-blue), rgba(15, 139, 255, 0.2));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-icon i {
+            font-size: 20px;
+            color: var(--accent-blue);
+        }
+
+        .contact-content h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .contact-content p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .contact-content a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-content a:hover {
+            color: var(--accent-yellow);
+            text-decoration: underline;
+        }
+
+        .contact-note {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .contact-note i {
+            color: var(--accent-yellow);
+        }
+
+        /* Help Form */
+        .help-form .form-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            height: 100%;
+        }
+
+        .help-form .form-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+        }
+
+        .help-form .form-card h3 i {
+            color: var(--accent-yellow);
+        }
+
+        .help-form .form-card > p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
+        .help-form-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .help-form-content .form-group {
+            margin-bottom: 0;
+        }
+
+        .help-form-content label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .help-form-content input,
+        .help-form-content select,
+        .help-form-content textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: var(--font-primary);
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .help-form-content input:focus,
+        .help-form-content select:focus,
+        .help-form-content textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            background: rgba(15, 139, 255, 0.05);
+            box-shadow: 0 0 0 3px rgba(15, 139, 255, 0.1);
+        }
+
+        .help-form-content textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .char-counter {
+            text-align: right;
+            margin-top: 5px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .help-form-content .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .help-form-content .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 4px;
+        }
+
+        .help-form-content .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: normal;
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .help-form-content button[type="submit"] {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .faq-section h3 {
+            color: var(--text);
+            font-size: 24px;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-3px);
+        }
+
+        .faq-item h5 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-item h5 i {
+            color: var(--accent-yellow);
+            font-size: 14px;
+        }
+
+        .faq-item p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* Form Messages */
+        .form-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 15px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .form-message.success {
+            background: rgba(75, 181, 67, 0.1);
+            border: 1px solid rgba(75, 181, 67, 0.3);
+            color: #4bb543;
+        }
+
+        .form-message.error {
+            background: rgba(255, 70, 85, 0.1);
+            border: 1px solid rgba(255, 70, 85, 0.3);
+            color: #ff4655;
+        }
+
+        .form-message i {
+            font-size: 20px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: var(--fs-xl);
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .about-grid,
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-icon {
+                margin: 0 auto;
+            }
+            
+            .contact-note {
+                justify-content: center;
+            }
+            
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+            
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            
+            .hero-description {
+                font-size: var(--fs-base);
+            }
+            
+            .section {
+                padding: var(--spacing-xl) 0;
+            }
+            
+            .help-form .form-card,
+            .faq-section {
+                padding: 20px;
+            }
+            
+            .contact-card {
+                padding: 20px;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--accent-blue);
+            border-radius: var(--radius-round);
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Additional Animations */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(15, 139, 255, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(15, 139, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(15, 139, 255, 0);
+            }
+        }
+
+        .hover-lift {
+            transition: transform var(--transition-normal);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                <img src="public/algo-arena.png" alt="Algo Arena Logo">
                 <a href="#home">
                     <h1>ALGO ARENA</h1>
                 </a>
             </div>
-            
+
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#games" class="nav-link">Games</a></li>
                 <li><a href="#rules" class="nav-link">Rules</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#help" class="nav-link">Help</a></li>
                 <li><a href="free-fire.html" class="btn btn-primary">Free Fire</a></li>
                 <li><a href="valo.html" class="btn btn-secondary">Valorant</a></li>
             </ul>
-            
+
             <button class="hamburger" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
@@ -48,7 +1252,7 @@
             <li><a href="#about" class="nav-link">About</a></li>
             <li><a href="#games" class="nav-link">Games</a></li>
             <li><a href="#rules" class="nav-link">Rules</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li><a href="#help" class="nav-link">Help</a></li>
             <li><a href="free-fire.html" class="btn btn-primary">Free Fire</a></li>
             <li><a href="valo.html" class="btn btn-secondary">Valorant</a></li>
         </ul>
@@ -60,12 +1264,12 @@
         <div class="container">
             <h1 class="hero-title fade-in">Compete. Win. Dominate.</h1>
             <p class="hero-description fade-in">
-                Join the most thrilling esports tournaments with massive prize pools and professional organization. 
+                Join the most thrilling esports tournaments with massive prize pools and professional organization.
                 Whether you're a casual player or aspiring pro, Algo Arena is your battlefield.
             </p>
             <div class="hero-actions fade-in">
                 <a href="#games" class="btn btn-primary mr-2">View Tournaments</a>
-                <a href="free-fire.html" class="btn btn-outline">Register Now</a>
+                <a href="#help" class="btn btn-outline">Need Help?</a>
             </div>
         </div>
     </section>
@@ -76,30 +1280,30 @@
             <div class="section-header">
                 <h2 class="section-title">About Algo Arena</h2>
                 <p class="section-subtitle">
-                    Premier esports tournament platform dedicated to providing competitive gamers with 
+                    Premier esports tournament platform dedicated to providing competitive gamers with
                     professionally organized tournaments, fair play environments, and substantial rewards.
                 </p>
             </div>
-            
+
             <div class="about-grid">
                 <div class="card slide-left">
                     <i class="fas fa-trophy fa-3x text-gradient mb-3"></i>
                     <h3>Professional Organization</h3>
                     <p>Our tournaments follow strict competitive rules with experienced admins ensuring fair play.</p>
                 </div>
-                
+
                 <div class="card slide-left stagger-1">
                     <i class="fas fa-gem fa-3x text-gradient mb-3"></i>
                     <h3>Substantial Prizes</h3>
                     <p>Compete for cash prizes, gaming gear, and in-game items worth thousands of dollars.</p>
                 </div>
-                
+
                 <div class="card slide-right stagger-2">
                     <i class="fas fa-users fa-3x text-gradient mb-3"></i>
                     <h3>Community Focus</h3>
                     <p>Join a growing community of competitive gamers and make connections that last.</p>
                 </div>
-                
+
                 <div class="card slide-right stagger-3">
                     <i class="fas fa-calendar-alt fa-3x text-gradient mb-3"></i>
                     <h3>Regular Events</h3>
@@ -118,17 +1322,18 @@
                     Choose your battlefield and compete against the best players in these thrilling esports titles
                 </p>
             </div>
-            
+
             <div class="games-grid">
                 <div class="game-card free-fire scale-in">
                     <div class="game-overlay"></div>
                     <div class="game-content">
                         <h3><i class="fas fa-fire"></i> Free Fire</h3>
-                        <p>Battle royale action at its finest. Compete in squad tournaments with massive prize pools.</p>
+                        <p>Battle royale action at its finest. Compete in squad tournaments with massive prize pools.
+                        </p>
                         <a href="free-fire.html" class="btn btn-primary">Register Now</a>
                     </div>
                 </div>
-                
+
                 <div class="game-card valorant scale-in">
                     <div class="game-overlay"></div>
                     <div class="game-content">
@@ -147,10 +1352,11 @@
             <div class="section-header">
                 <h2 class="section-title">Tournament Rules</h2>
                 <p class="section-subtitle">
-                    To ensure fair and competitive gameplay, all participants must adhere to these rules and restrictions
+                    To ensure fair and competitive gameplay, all participants must adhere to these rules and
+                    restrictions
                 </p>
             </div>
-            
+
             <div class="rules-grid">
                 <div class="card stagger-fade stagger-1">
                     <h4><i class="fas fa-clipboard-check text-gradient"></i> General Rules</h4>
@@ -161,7 +1367,7 @@
                         <li>Decisions by tournament admins are final</li>
                     </ul>
                 </div>
-                
+
                 <div class="card stagger-fade stagger-2">
                     <h4><i class="fas fa-fire text-gradient"></i> Free Fire Specific</h4>
                     <ul>
@@ -171,7 +1377,7 @@
                         <li>Points system based on kills and placement</li>
                     </ul>
                 </div>
-                
+
                 <div class="card stagger-fade stagger-3">
                     <h4><i class="fas fa-crosshairs text-gradient"></i> Valorant Specific</h4>
                     <ul>
@@ -181,7 +1387,7 @@
                         <li>No exploit or bug abuse allowed</li>
                     </ul>
                 </div>
-                
+
                 <div class="card stagger-fade stagger-4">
                     <h4><i class="fas fa-users-cog text-gradient"></i> Code of Conduct</h4>
                     <ul>
@@ -195,36 +1401,139 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="section" id="contact">
+    <!-- Help Section -->
+    <section class="section" id="help">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
+                <h2 class="section-title">Need Help?</h2>
                 <p class="section-subtitle">
-                    Have questions about our tournaments or need support? Our team is ready to help you 24/7
+                    Have questions about our tournaments or need support? Get in touch with our team
                 </p>
             </div>
-            
-            <div class="contact-grid">
-                <div class="card slide-left">
-                    <h3><i class="fas fa-envelope text-gradient"></i> Email Support</h3>
-                    <p>support@algoarena.com</p>
-                    <p>tournaments@algoarena.com</p>
+
+            <div class="help-container">
+                <!-- Contact Methods -->
+                <div class="contact-methods slide-left">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h4>Email Support</h4>
+                            <p><a href="mailto:support@algoarena.com">support@algoarena.com</a></p>
+                            <p><a href="mailto:tournaments@algoarena.com">tournaments@algoarena.com</a></p>
+                            <span class="contact-note"><i class="fas fa-clock"></i> Response: 4-6 hours</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h4>Live Support</h4>
+                            <p>Join our Discord for instant help</p>
+                            <a href="https://discord.gg/algoarena" target="_blank" class="btn btn-outline">
+                                <i class="fab fa-discord"></i> Join Discord
+                            </a>
+                            <span class="contact-note"><i class="fas fa-bolt"></i> 24/7 during tournaments</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h4>Phone Support</h4>
+                            <p><a href="tel:+919692699132">+91 9692699132</a></p>
+                            <span class="contact-note"><i class="fas fa-clock"></i> Mon-Fri: 10AM-8PM IST</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="card slide-right">
-                    <h3><i class="fas fa-headset text-gradient"></i> Live Support</h3>
-                    <p>Available 24/7 on our Discord server</p>
-                    <div class="social-links">
-                        <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
-                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+
+                <!-- Help Form -->
+                <div class="help-form slide-right">
+                    <div class="form-card">
+                        <h3><i class="fas fa-question-circle"></i> Send us a Message</h3>
+                        <p>Fill out the form below and we'll get back to you soon</p>
+
+                        <form id="helpForm" class="help-form-content">
+                            <div class="form-group">
+                                <label for="help-name">Your Name *</label>
+                                <input type="text" id="help-name" placeholder="Enter your name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="help-email">Email Address *</label>
+                                <input type="email" id="help-email" placeholder="you@example.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="help-subject">Subject *</label>
+                                <select id="help-subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="tournament">Tournament Inquiry</option>
+                                    <option value="registration">Registration Help</option>
+                                    <option value="payment">Payment Issues</option>
+                                    <option value="rules">Rules Clarification</option>
+                                    <option value="technical">Technical Support</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="help-game">Related Game</label>
+                                <select id="help-game">
+                                    <option value="">Select Game (Optional)</option>
+                                    <option value="freefire">Free Fire</option>
+                                    <option value="valorant">Valorant</option>
+                                    <option value="both">Both</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="help-message">Your Message *</label>
+                                <textarea id="help-message" rows="5" placeholder="Describe your issue or question..."
+                                    required></textarea>
+                                <div class="char-counter">0/500 characters</div>
+                            </div>
+
+                            <div class="form-group checkbox-group">
+                                <input type="checkbox" id="help-newsletter" checked>
+                                <label for="help-newsletter">Send me tournament updates and announcements</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
-            
-            <div class="text-center mt-5">
-                <a href="contact.html" class="btn btn-primary">Contact Us</a>
+
+            <!-- FAQ Section -->
+            <div class="faq-section mt-5">
+                <h3 class="text-center mb-4">Frequently Asked Questions</h3>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h5><i class="fas fa-user-plus"></i> How do I register?</h5>
+                        <p>Click on your game (Free Fire or Valorant), fill the form, and complete payment of ₹20 per
+                            team.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h5><i class="fas fa-money-bill-wave"></i> What's the registration fee?</h5>
+                        <p>Registration is ₹20 per team. This helps cover server costs and tournament organization.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h5><i class="fas fa-trophy"></i> What are the prizes?</h5>
+                        <p>Prizes include cash rewards, gaming gear, and in-game items. Amounts vary per tournament.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h5><i class="fas fa-clock"></i> When do tournaments start?</h5>
+                        <p>You'll receive tournament details via email within 24 hours of registration completion.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -234,12 +1543,17 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <div class="footer-logo">
-                    <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                    <img src="./public/algo-arena.png" alt="Algo Arena Logo">
                     <h3>ALGO ARENA</h3>
                 </div>
                 <p>Professional esports tournament platform for competitive gamers.</p>
+                <div class="footer-social">
+                    <a href="https://discord.gg/algoarena" target="_blank"><i class="fab fa-discord"></i></a>
+                    <a href="https://twitter.com/algoarena" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/algoarena" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
-            
+
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
@@ -247,10 +1561,10 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#games">Games</a></li>
                     <li><a href="#rules">Rules</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#help">Help</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-links">
                 <h4>Tournaments</h4>
                 <ul>
@@ -259,7 +1573,7 @@
                     <li><a href="payment.html">Payment</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-links">
                 <h4>Legal</h4>
                 <ul>
@@ -268,14 +1582,16 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p class="copyright">© <span id="current-year">2025</span> Algo Arena. All rights reserved.</p>
+            <p class="disclaimer">Algo Arena is not affiliated with Garena Free Fire or Riot Games Valorant.</p>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="../js/supabaseClient.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>
