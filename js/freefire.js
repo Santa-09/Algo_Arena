@@ -6,11 +6,29 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         const supabase = window.getSupabase();
-        const data = Object.fromEntries(new FormData(form).entries());
+        const raw = Object.fromEntries(new FormData(form).entries());
 
-        data.game_type = 'freefire';
-        data.payment_status = 'pending';
-        data.created_at = new Date().toISOString();
+        // ✅ SEND ONLY DB COLUMNS
+        const data = {
+            fullname: raw.fullname,
+            email: raw.email,
+            phone: raw.phone,
+            country: raw.country,
+            team_name: raw.team_name,
+
+            player1_name: raw.player1_name,
+            player1_uid: raw.player1_uid,
+            player2_name: raw.player2_name,
+            player2_uid: raw.player2_uid,
+            player3_name: raw.player3_name,
+            player3_uid: raw.player3_uid,
+            player4_name: raw.player4_name,
+            player4_uid: raw.player4_uid,
+
+            game_type: 'freefire',
+            payment_status: 'pending',
+            created_at: new Date().toISOString()
+        };
 
         try {
             const { data: inserted, error } = await supabase
@@ -21,12 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (error) throw error;
 
-            // Redirect to payment with registration id
             window.location.href = `payment.html?game=freefire&id=${inserted.id}`;
 
         } catch (err) {
-            console.error(err);
-            alert('Registration failed. Please try again.');
+            console.error('Insert failed:', err);
+            alert('Registration failed. Check console.');
         }
     });
 });
