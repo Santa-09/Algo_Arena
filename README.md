@@ -1,38 +1,65 @@
-# Algo Arena - Esports Tournament Platform
+# 🎮 Algo Arena – Esports Tournament Platform
 
-## 🎮 About
-Professional esports tournament platform for Free Fire and Valorant with registration, payment, and contact systems.
+Algo Arena is a modern, responsive **esports tournament registration platform** built using **HTML, CSS, JavaScript, and Supabase**.  
+It allows players to register for **Free Fire** and **Valorant** tournaments and complete payments via **UPI QR**.
+
+---
+
+## 🚀 Live Features
+
+- 🕹️ Free Fire Tournament Registration  
+- 🎯 Valorant Tournament Registration  
+- 💳 UPI QR-based Payment System  
+- ☁️ Supabase Database Integration  
+- 📱 Fully Responsive UI  
+- 🔒 Secure client-side validation  
+- ⚡ Fast static-site deployment (Vercel / Netlify)
+
+---
 
 ## 📁 Project Structure
 
-algo-arena/
-├── public/ # Static assets
-├── pages/ # HTML pages
-├── js/ # JavaScript modules
-├── css/ # Stylesheets
-└── .env # Environment variables
+project/
+├── public/
+│ └── algo-arena.png # Logo / Favicon
+├── js/
+│ ├── main.js # Global scripts
+│ ├── supabaseClient.js # Supabase configuration
+│ ├── freefire.js # Free Fire logic
+│ ├── valorant.js # Valorant logic
+│ └── payment.js # Payment handling
+├── index.html # Home page
+├── free-fire.html # Free Fire registration
+├── valo.html # Valorant registration
+└── payment.html # Payment page
 
 
-## 🚀 Setup Instructions
+---
 
-1. **Clone the repository**
-2. **Install dependencies** (if using build tools)
-3. **Configure Supabase**
-   - Create a Supabase project
-   - Set up tables (see Database Schema)
-   - Update `.env` with your credentials
-4. **Deploy** to any static hosting
+## 🛠️ Tech Stack
 
-## 🔧 Database Schema
+- **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
+- **Database:** Supabase (PostgreSQL)
+- **Payments:** UPI QR Code
+- **Hosting:** Vercel / Netlify
+- **Icons & Fonts:** Font Awesome, Google Fonts
 
-### Tables Needed:
-1. `freefire_registrations`
-2. `valorant_registrations`
-3. `payments`
-4. `contact_messages`
+---
 
-## 🌐 Live Deployment
-Host on Vercel, Netlify, or any static hosting service.
+## 🔗 Supabase Tables Used
 
-## 📞 Support
-Contact: support@algoarena.com
+- `freefire_registrations`
+- `valorant_registrations`
+- `payments`
+
+All data is stored securely using Supabase’s REST API.
+
+---
+
+## 📦 Deployment Instructions
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/your-username/algo-arena.git
+cd algo-arena
+
