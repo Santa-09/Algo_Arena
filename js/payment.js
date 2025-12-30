@@ -1,175 +1,115 @@
 /**
- * Payment Processing Handler
- * Algo Arena – Supabase Integrated (Production Safe)
+ * Payment Handler – FINAL WORKING VERSION
  */
 
-/* ===============================
-   SAFE GLOBAL PAYMENT CONFIG
-================================ */
 if (!window.PAYMENT_CONFIG) {
     window.PAYMENT_CONFIG = {
         upiId: '9692699132@fam',
-        payeeName: 'Algo Arena',
         amount: 20,
-        currency: 'INR',
-        homePageUrl: 'index.html',
-        successRedirectDelay: 3000
+        homePage: 'index.html'
     };
 }
 
-const PAYMENT_CONFIG = window.PAYMENT_CONFIG;
-const supabase = window.getSupabase();
-
-/* ===============================
-   PAYMENT HANDLER CLASS
-================================ */
 class PaymentHandler {
     constructor() {
-        this.transactionIdInput = document.getElementById('transaction-id');
-        this.verifyButton = document.querySelector('.verify-button');
-        this.successMessage = document.getElementById('success-message');
-        this.errorMessage = document.getElementById('error-message');
-        this.qrElement = document.getElementById('qrcode');
+        this.txnInput = document.getElementById('transaction-id');
+        this.verifyBtn = document.querySelector('.verify-button');
+        this.success = document.getElementById('success-message');
+        this.error = document.getElementById('error-message');
 
-        this.registrationData =
+        this.data =
             Session.getRegistration('freefire') ||
             Session.getRegistration('valorant');
 
-        this.init();
-    }
-
-    init() {
-        if (!this.registrationData) {
+        if (!this.data) {
             alert('No registration data found');
             window.location.href = 'index.html';
             return;
         }
 
-        if (this.qrElement) this.generateQRCode();
-        if (this.verifyButton)
-            this.verifyButton.addEventListener('click', () => this.verifyPayment());
+        this.verifyBtn.addEventListener('click', () => this.verify());
     }
 
-    generateQRCode() {
-        const upiURL = `upi://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${encodeURIComponent(
-            PAYMENT_CONFIG.payeeName
-        )}&am=${PAYMENT_CONFIG.amount}&cu=${PAYMENT_CONFIG.currency}`;
+    async verify() {
+        const txn = this.txnInput.value.trim();
+        if (!txn) return this.showError('Enter transaction ID');
 
-        this.qrElement.innerHTML = '';
-
-        QRCode.toCanvas(
-            upiURL,
-            { width: 220, margin: 2 },
-            (err, canvas) => {
-                if (err) {
-                    this.qrElement.innerHTML = '<p>QR generation failed</p>';
-                    return;
-                }
-                this.qrElement.appendChild(canvas);
-            }
-        );
-    }
-
-    async verifyPayment() {
-        const txnId = this.transactionIdInput.value.trim();
-        this.clearMessages();
-
-        if (!txnId) {
-            return this.showError('Please enter Transaction ID');
-        }
-
-        this.setLoading(true);
+        this.verifyBtn.disabled = true;
+        this.verifyBtn.innerHTML = 'Verifying...';
 
         try {
-            // 1️⃣ Prevent duplicate transaction IDs
-            const { data: existing } = await supabase
-                .from('payments')
-                .select('id')
-                .eq('transaction_id', txnId);
+            const supabase = window.getSupabase();
 
-            if (existing.length > 0) {
-                throw new Error('Transaction ID already used');
+            // 1️⃣ prevent duplicate payment
+            const { data: exists } = await supabase
+                .from(TABLES.PAYMENTS)
+                .select('id')
+                .eq('transaction_id', txn);
+
+            if (exists.length > 0) {
+                throw new Error('Transaction already used');
             }
 
-            // 2️⃣ Insert registration
+            // 2️⃣ insert registration
             const table =
-                this.registrationData.gameType === 'freefire'
+                this.data.gameType === 'freefire'
                     ? TABLES.FREE_FIRE
                     : TABLES.VALORANT;
 
-            const { error: regError } = await supabase.from(table).insert([
+            const { error: regErr } = await supabase.from(table).insert([
                 {
-                    ...this.registrationData,
+                    ...this.data,
                     payment_status: 'verified',
                     paid_at: new Date().toISOString()
                 }
             ]);
 
-            if (regError) throw regError;
+            if (regErr) throw regErr;
 
-            // 3️⃣ Insert payment record
-            const { error: payError } = await supabase.from('payments').insert([
-                {
-                    transaction_id: txnId,
-                    game_type: this.registrationData.gameType,
-                    amount: PAYMENT_CONFIG.amount,
-                    status: 'verified'
-                }
-            ]);
+            // 3️⃣ insert payment record
+            const { error: payErr } = await supabase
+                .from(TABLES.PAYMENTS)
+                .insert([
+                    {
+                        transaction_id: txn,
+                        game_type: this.data.gameType,
+                        amount: PAYMENT_CONFIG.amount,
+                        status: 'verified'
+                    }
+                ]);
 
-            if (payError) throw payError;
+            if (payErr) throw payErr;
 
-            // 4️⃣ Cleanup & success
             Session.clearRegistration('freefire');
             Session.clearRegistration('valorant');
 
             this.showSuccess();
+
+            setTimeout(() => {
+                window.location.href = PAYMENT_CONFIG.homePage;
+            }, 3000);
+
         } catch (err) {
             this.showError(err.message);
-            console.error('Payment verification error:', err);
+            console.error(err);
         } finally {
-            this.setLoading(false);
+            this.verifyBtn.disabled = false;
+            this.verifyBtn.innerHTML = 'Verify Payment';
         }
     }
 
-    /* ===============================
-       UI HELPERS
-    ================================ */
-    setLoading(state) {
-        this.verifyButton.disabled = state;
-        this.verifyButton.innerHTML = state
-            ? '<i class="fas fa-spinner fa-spin"></i> Verifying...'
-            : 'Verify Payment';
-    }
-
     showSuccess() {
-        this.successMessage.style.display = 'flex';
-        let sec = PAYMENT_CONFIG.successRedirectDelay / 1000;
-
-        const timer = setInterval(() => {
-            this.successMessage.querySelector('p').innerHTML =
-                `Payment verified successfully.<br>Redirecting in ${sec--}s`;
-            if (sec < 0) {
-                clearInterval(timer);
-                window.location.href = PAYMENT_CONFIG.homePageUrl;
-            }
-        }, 1000);
+        this.success.style.display = 'flex';
+        this.error.style.display = 'none';
     }
 
     showError(msg) {
-        this.errorMessage.querySelector('p').textContent = msg;
-        this.errorMessage.style.display = 'flex';
-    }
-
-    clearMessages() {
-        this.successMessage.style.display = 'none';
-        this.errorMessage.style.display = 'none';
+        this.error.querySelector('p').textContent = msg;
+        this.error.style.display = 'flex';
+        this.success.style.display = 'none';
     }
 }
 
-/* ===============================
-   INIT
-================================ */
 document.addEventListener('DOMContentLoaded', () => {
     new PaymentHandler();
 });
