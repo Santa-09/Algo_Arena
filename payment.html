@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algo Arena - Complete Payment</title>
+    <link rel="icon" href="/public/algo-arena.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="../public/algo-arena.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <style>
         /* Base Styles & Variables */
@@ -21,12 +24,12 @@
             --success: #4bb543;
             --warning: #ffa500;
             --error: #ff3333;
-            
+
             /* Text Colors */
             --text: #ffffff;
             --text-secondary: #b0b0c0;
             --text-muted: #888899;
-            
+
             /* Spacing */
             --spacing-xs: 0.25rem;
             --spacing-sm: 0.5rem;
@@ -34,11 +37,11 @@
             --spacing-lg: 1.5rem;
             --spacing-xl: 2rem;
             --spacing-xxl: 3rem;
-            
+
             /* Typography */
             --font-primary: 'Poppins', sans-serif;
             --font-mono: 'Courier New', monospace;
-            
+
             /* Font Sizes */
             --fs-xs: 0.75rem;
             --fs-sm: 0.875rem;
@@ -48,25 +51,25 @@
             --fs-xl: 1.5rem;
             --fs-xxl: 2rem;
             --fs-xxxl: 3rem;
-            
+
             /* Border Radius */
             --radius-sm: 4px;
             --radius-md: 8px;
             --radius-lg: 12px;
             --radius-xl: 16px;
             --radius-round: 50%;
-            
+
             /* Shadows */
             --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
             --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
             --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
             --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.4);
-            
+
             /* Transitions */
             --transition-fast: 0.2s ease;
             --transition-normal: 0.3s ease;
             --transition-slow: 0.5s ease;
-            
+
             /* Gradients */
             --gradient-primary: linear-gradient(135deg, var(--accent-blue), #4654ff);
             --gradient-secondary: linear-gradient(135deg, var(--accent-red), #ff2e4a);
@@ -92,24 +95,46 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 30%, rgba(15, 139, 255, 0.05) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(255, 70, 85, 0.05) 0%, transparent 50%);
         }
 
         /* Typography */
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: var(--spacing-md);
         }
 
-        h1 { font-size: var(--fs-xxxl); }
-        h2 { font-size: var(--fs-xxl); }
-        h3 { font-size: var(--fs-xl); }
-        h4 { font-size: var(--fs-lg); }
-        h5 { font-size: var(--fs-md); }
-        h6 { font-size: var(--fs-base); }
+        h1 {
+            font-size: var(--fs-xxxl);
+        }
+
+        h2 {
+            font-size: var(--fs-xxl);
+        }
+
+        h3 {
+            font-size: var(--fs-xl);
+        }
+
+        h4 {
+            font-size: var(--fs-lg);
+        }
+
+        h5 {
+            font-size: var(--fs-md);
+        }
+
+        h6 {
+            font-size: var(--fs-base);
+        }
 
         p {
             margin-bottom: var(--spacing-md);
@@ -133,9 +158,17 @@
             padding: 0 var(--spacing-lg);
         }
 
-        .text-center { text-align: center; }
-        .text-left { text-align: left; }
-        .text-right { text-align: right; }
+        .text-center {
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-right {
+            text-align: right;
+        }
 
         .text-gradient {
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-yellow));
@@ -144,53 +177,133 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .mb-1 { margin-bottom: var(--spacing-xs); }
-        .mb-2 { margin-bottom: var(--spacing-sm); }
-        .mb-3 { margin-bottom: var(--spacing-md); }
-        .mb-4 { margin-bottom: var(--spacing-lg); }
-        .mb-5 { margin-bottom: var(--spacing-xl); }
+        .mb-1 {
+            margin-bottom: var(--spacing-xs);
+        }
 
-        .mt-1 { margin-top: var(--spacing-xs); }
-        .mt-2 { margin-top: var(--spacing-sm); }
-        .mt-3 { margin-top: var(--spacing-md); }
-        .mt-4 { margin-top: var(--spacing-lg); }
-        .mt-5 { margin-top: var(--spacing-xl); }
+        .mb-2 {
+            margin-bottom: var(--spacing-sm);
+        }
 
-        .mr-1 { margin-right: var(--spacing-xs); }
-        .mr-2 { margin-right: var(--spacing-sm); }
-        .mr-3 { margin-right: var(--spacing-md); }
+        .mb-3 {
+            margin-bottom: var(--spacing-md);
+        }
 
-        .ml-1 { margin-left: var(--spacing-xs); }
-        .ml-2 { margin-left: var(--spacing-sm); }
-        .ml-3 { margin-left: var(--spacing-md); }
+        .mb-4 {
+            margin-bottom: var(--spacing-lg);
+        }
 
-        .p-1 { padding: var(--spacing-xs); }
-        .p-2 { padding: var(--spacing-sm); }
-        .p-3 { padding: var(--spacing-md); }
-        .p-4 { padding: var(--spacing-lg); }
-        .p-5 { padding: var(--spacing-xl); }
+        .mb-5 {
+            margin-bottom: var(--spacing-xl);
+        }
 
-        .flex { display: flex; }
+        .mt-1 {
+            margin-top: var(--spacing-xs);
+        }
+
+        .mt-2 {
+            margin-top: var(--spacing-sm);
+        }
+
+        .mt-3 {
+            margin-top: var(--spacing-md);
+        }
+
+        .mt-4 {
+            margin-top: var(--spacing-lg);
+        }
+
+        .mt-5 {
+            margin-top: var(--spacing-xl);
+        }
+
+        .mr-1 {
+            margin-right: var(--spacing-xs);
+        }
+
+        .mr-2 {
+            margin-right: var(--spacing-sm);
+        }
+
+        .mr-3 {
+            margin-right: var(--spacing-md);
+        }
+
+        .ml-1 {
+            margin-left: var(--spacing-xs);
+        }
+
+        .ml-2 {
+            margin-left: var(--spacing-sm);
+        }
+
+        .ml-3 {
+            margin-left: var(--spacing-md);
+        }
+
+        .p-1 {
+            padding: var(--spacing-xs);
+        }
+
+        .p-2 {
+            padding: var(--spacing-sm);
+        }
+
+        .p-3 {
+            padding: var(--spacing-md);
+        }
+
+        .p-4 {
+            padding: var(--spacing-lg);
+        }
+
+        .p-5 {
+            padding: var(--spacing-xl);
+        }
+
+        .flex {
+            display: flex;
+        }
+
         .flex-center {
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         .flex-between {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        .flex-column { flex-direction: column; }
-        .flex-wrap { flex-wrap: wrap; }
 
-        .grid { display: grid; }
+        .flex-column {
+            flex-direction: column;
+        }
 
-        .w-100 { width: 100%; }
-        .h-100 { height: 100%; }
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
 
-        .relative { position: relative; }
-        .absolute { position: absolute; }
+        .grid {
+            display: grid;
+        }
+
+        .w-100 {
+            width: 100%;
+        }
+
+        .h-100 {
+            height: 100%;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .absolute {
+            position: absolute;
+        }
 
         /* Buttons */
         .btn {
@@ -468,9 +581,10 @@
             from {
                 text-shadow: 0 0 10px rgba(15, 139, 255, 0.3);
             }
+
             to {
                 text-shadow: 0 0 20px rgba(15, 139, 255, 0.6),
-                            0 0 30px rgba(255, 204, 0, 0.4);
+                    0 0 30px rgba(255, 204, 0, 0.4);
             }
         }
 
@@ -603,11 +717,11 @@
             .hero-title {
                 font-size: 2.5rem;
             }
-            
+
             .nav-menu {
                 display: none;
             }
-            
+
             .hamburger {
                 display: flex;
             }
@@ -617,16 +731,16 @@
             .hero-title {
                 font-size: 2rem;
             }
-            
+
             .section-title {
                 font-size: var(--fs-xl);
             }
-            
+
             .hero-actions {
                 flex-direction: column;
                 gap: var(--spacing-sm);
             }
-            
+
             .btn {
                 width: 100%;
                 justify-content: center;
@@ -637,15 +751,15 @@
             .container {
                 padding: 0 var(--spacing-md);
             }
-            
+
             .hero-title {
                 font-size: 1.75rem;
             }
-            
+
             .hero-description {
                 font-size: var(--fs-base);
             }
-            
+
             .section {
                 padding: var(--spacing-xl) 0;
             }
@@ -826,38 +940,38 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .payment-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
         }
-        
+
         @media (max-width: 992px) {
             .payment-grid {
                 grid-template-columns: 1fr;
             }
         }
-        
+
         .qr-container {
             text-align: center;
         }
-        
+
         .qr-header {
             margin-bottom: 1.5rem;
         }
-        
+
         .qr-header h4 {
             color: var(--accent-yellow);
             margin-bottom: 0.5rem;
         }
-        
+
         .qr-header .amount {
             font-weight: bold;
             color: var(--success);
             font-size: 1.2rem;
         }
-        
+
         .qr-display {
             background: white;
             padding: 1rem;
@@ -869,34 +983,34 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .qr-placeholder {
             color: var(--text-secondary);
             text-align: center;
         }
-        
+
         .qr-placeholder i {
             margin-bottom: 1rem;
         }
-        
+
         .qr-error {
             color: var(--error);
             text-align: center;
         }
-        
+
         .upi-details {
             text-align: left;
             margin-top: 1.5rem;
             padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .upi-details h5 {
             color: var(--text);
             margin-bottom: 1rem;
             font-size: 1.1rem;
         }
-        
+
         .info-row {
             display: flex;
             align-items: center;
@@ -906,18 +1020,18 @@
             background: rgba(255, 255, 255, 0.03);
             border-radius: var(--radius-sm);
         }
-        
+
         .info-row .label {
             font-weight: 500;
             color: var(--text-secondary);
         }
-        
+
         .info-row .value {
             font-family: var(--font-mono);
             color: var(--text);
             font-weight: 500;
         }
-        
+
         .copy-btn {
             background: none;
             border: none;
@@ -927,21 +1041,21 @@
             border-radius: var(--radius-sm);
             transition: all var(--transition-normal);
         }
-        
+
         .copy-btn:hover {
             background: rgba(255, 204, 0, 0.1);
         }
-        
+
         .payment-options {
             margin: 2rem 0;
         }
-        
+
         .option-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
-        
+
         .payment-option {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -951,37 +1065,37 @@
             cursor: pointer;
             transition: all var(--transition-normal);
         }
-        
+
         .payment-option:hover {
             background: rgba(255, 255, 255, 0.08);
             border-color: var(--accent-yellow);
             transform: translateY(-2px);
         }
-        
+
         .payment-option i {
             font-size: 2rem;
             margin-bottom: 0.5rem;
             color: var(--text);
         }
-        
+
         .payment-option span {
             display: block;
             font-size: 0.9rem;
             color: var(--text-secondary);
         }
-        
+
         .alt-methods {
             text-align: center;
             margin-top: 2rem;
         }
-        
+
         .separator {
             position: relative;
             text-align: center;
             color: var(--text-secondary);
             margin: 1.5rem 0;
         }
-        
+
         .separator::before {
             content: "";
             position: absolute;
@@ -991,78 +1105,78 @@
             height: 1px;
             background: rgba(255, 255, 255, 0.1);
         }
-        
+
         .separator span {
             background: var(--secondary);
             padding: 0 1rem;
             position: relative;
         }
-        
+
         .upi-redirect {
             width: 100%;
         }
-        
+
         .verification-section .card {
             height: 100%;
         }
-        
+
         .verification-header {
             margin-bottom: 1.5rem;
         }
-        
+
         .verification-header h4 {
             color: var(--accent-yellow);
             margin-bottom: 0.5rem;
         }
-        
+
         .transaction-form {
             margin-top: 1rem;
         }
-        
+
         .payment-instructions {
             margin-top: 2rem;
         }
-        
+
         .payment-instructions h5 {
             color: var(--accent-yellow);
             margin-bottom: 1rem;
         }
-        
+
         .instructions-list {
             padding-left: 1.5rem;
             color: var(--text-secondary);
         }
-        
+
         .instructions-list li {
             margin-bottom: 0.5rem;
         }
-        
+
         .payment-notice {
             background: linear-gradient(45deg, rgba(255, 204, 0, 0.05), transparent);
             border-left: 4px solid var(--accent-yellow);
         }
-        
+
         .notice-content {
             display: flex;
             align-items: flex-start;
             gap: 1.5rem;
         }
-        
+
         .notice-content i {
             flex-shrink: 0;
             margin-top: 0.5rem;
         }
-        
+
         .notice-content h4 {
             color: var(--accent-yellow);
             margin-bottom: 1rem;
         }
-        
+
         .notice-content ul {
             list-style: none;
             padding: 0;
         }
-        
+
         .notice-content li {
             margin-bottom: 0.5rem;
             color: var(--text-secondary);
@@ -1070,34 +1184,34 @@
             align-items: flex-start;
             gap: 0.5rem;
         }
-        
+
         .notice-content li::before {
             content: "•";
             color: var(--accent-yellow);
         }
-        
+
         .registration-summary {
             background: linear-gradient(45deg, rgba(15, 139, 255, 0.05), transparent);
             border-left: 4px solid var(--accent-blue);
         }
-        
+
         .summary-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
         }
-        
+
         .summary-header h4 {
             color: var(--accent-blue);
         }
-        
+
         .summary-details {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
         }
-        
+
         .detail-item {
             display: flex;
             justify-content: space-between;
@@ -1106,34 +1220,34 @@
             background: rgba(255, 255, 255, 0.03);
             border-radius: var(--radius-sm);
         }
-        
+
         .detail-item .label {
             color: var(--text-secondary);
         }
-        
+
         .detail-item .value {
             font-weight: 500;
             color: var(--text);
         }
-        
+
         .amount {
             color: var(--success) !important;
             font-weight: bold;
         }
-        
+
         .status-badge {
             padding: 0.3rem 0.8rem;
             border-radius: 2rem;
             font-size: 0.8rem;
             font-weight: 600;
         }
-        
+
         .status-badge.pending {
             background: rgba(255, 165, 0, 0.1);
             color: var(--warning);
             border: 1px solid var(--warning);
         }
-        
+
         .status-badge.verified {
             background: rgba(75, 181, 67, 0.1);
             color: var(--success);
@@ -1149,9 +1263,11 @@
             0% {
                 box-shadow: 0 0 0 0 rgba(15, 139, 255, 0.4);
             }
+
             70% {
                 box-shadow: 0 0 0 10px rgba(15, 139, 255, 0);
             }
+
             100% {
                 box-shadow: 0 0 0 0 rgba(15, 139, 255, 0);
             }
@@ -1169,22 +1285,28 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                <img src="/public/algo-arena.png" alt="Algo Arena Logo">
                 <a href="index.html#home">
                     <h1>ALGO ARENA</h1>
                 </a>
             </div>
-            
+
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="index.html#about" class="nav-link">About</a></li>
@@ -1193,7 +1315,7 @@
                 <li><a href="free-fire.html" class="nav-link">Free Fire</a></li>
                 <li><a href="valo.html" class="nav-link">Valorant</a></li>
             </ul>
-            
+
             <button class="hamburger" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
@@ -1241,7 +1363,7 @@
                                 <h4><i class="fas fa-qrcode text-gradient"></i> Scan to Pay</h4>
                                 <p class="small">Amount: <span class="amount">₹20</span></p>
                             </div>
-                            
+
                             <div class="qr-display" id="qrcode">
                                 <!-- QR Code will be generated here -->
                                 <div class="qr-placeholder">
@@ -1249,7 +1371,7 @@
                                     <p>Generating QR code...</p>
                                 </div>
                             </div>
-                            
+
                             <div class="qr-details">
                                 <div class="upi-details">
                                     <h5><i class="fas fa-mobile-alt"></i> UPI Details</h5>
@@ -1273,7 +1395,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Payment Options -->
                         <div class="payment-options">
                             <div class="option-grid">
@@ -1295,12 +1417,12 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Alternative Methods -->
                         <div class="alt-methods">
                             <p class="separator">OR</p>
-                            <a href="upi://pay?pa=9692699132@fam&pn=Algo_Arena&am=20&cu=INR" 
-                               class="btn btn-primary upi-redirect">
+                            <a href="upi://pay?pa=9692699132@fam&pn=Algo_Arena&am=20&cu=INR"
+                                class="btn btn-primary upi-redirect">
                                 <i class="fas fa-external-link-alt"></i> Open UPI App
                             </a>
                             <button class="btn btn-outline mt-2" onclick="showManualInstructions()">
@@ -1316,23 +1438,23 @@
                                 <h4><i class="fas fa-check-circle text-gradient"></i> Verify Payment</h4>
                                 <p>Enter your UPI transaction ID after completing the payment</p>
                             </div>
-                            
+
                             <form id="paymentForm" class="transaction-form">
                                 <div class="form-group">
                                     <label for="transaction-id" class="required">Transaction ID</label>
                                     <input type="text" id="transaction-id" name="transaction_id"
-                                           placeholder="Enter your UPI transaction ID" required>
+                                        placeholder="Enter your UPI transaction ID" required>
                                     <span class="help-text">
-                                        <i class="fas fa-info-circle"></i> 
+                                        <i class="fas fa-info-circle"></i>
                                         You'll find this in your payment receipt or bank statement
                                     </span>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="payment-screenshot">Payment Screenshot (Optional)</label>
                                     <div class="file-input">
-                                        <input type="file" id="payment-screenshot" name="screenshot" 
-                                               accept="image/*" capture="environment">
+                                        <input type="file" id="payment-screenshot" name="screenshot" accept="image/*"
+                                            capture="environment">
                                         <label for="payment-screenshot" class="file-input-label">
                                             <i class="fas fa-camera"></i>
                                             <span>Upload Payment Screenshot</span>
@@ -1340,37 +1462,39 @@
                                     </div>
                                     <span class="help-text">Upload screenshot for faster verification</span>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="payment-time">Payment Date & Time</label>
                                     <input type="datetime-local" id="payment-time" name="payment_time">
                                 </div>
-                                
+
                                 <button type="button" class="btn btn-primary verify-button" onclick="verifyPayment()">
                                     <i class="fas fa-check-circle"></i> Verify Payment
                                 </button>
-                                
+
                                 <!-- Status Messages -->
                                 <div class="form-messages mt-4">
                                     <div id="success-message" class="form-message success" style="display: none;">
                                         <i class="fas fa-check-circle"></i>
                                         <div>
                                             <strong>Payment Verified Successfully!</strong>
-                                            <p>Your registration is now complete. We'll send you a confirmation email shortly.</p>
+                                            <p>Your registration is now complete. We'll send you a confirmation email
+                                                shortly.</p>
                                         </div>
                                     </div>
-                                    
+
                                     <div id="error-message" class="form-message error" style="display: none;">
                                         <i class="fas fa-exclamation-circle"></i>
                                         <div>
                                             <strong>Verification Failed</strong>
-                                            <p>Please check your transaction ID and try again. If the problem persists, contact support.</p>
+                                            <p>Please check your transaction ID and try again. If the problem persists,
+                                                contact support.</p>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        
+
                         <!-- Payment Instructions -->
                         <div class="payment-instructions card mt-4">
                             <h5><i class="fas fa-lightbulb text-gradient"></i> How to Pay</h5>
@@ -1409,12 +1533,12 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <div class="footer-logo">
-                    <img src="../public/algo-arena.png" alt="Algo Arena Logo">
+                    <img src="/public/algo-arena.png" alt="Algo Arena Logo">
                     <h3>ALGO ARENA</h3>
                 </div>
                 <p>Secure payment processing for tournament registration.</p>
             </div>
-            
+
             <div class="footer-links">
                 <h4>Support</h4>
                 <ul>
@@ -1423,7 +1547,7 @@
                     <li><a href="tel:+919692699132">+91 9692699132</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
@@ -1434,15 +1558,18 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p class="copyright">© <span id="current-year">2025</span> Algo Arena. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="../js/supabaseClient.js"></script>
-    <script src="../js/payment.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="./js/supabaseClient.js"></script>
+    <script src="./js/payment.js"></script>
+
     <script>
         // Payment Configuration
         const PAYMENT_CONFIG = {
@@ -1454,7 +1581,7 @@
         };
 
         // Generate QR Code on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             generateQRCode();
             loadRegistrationSummary();
             setupEventListeners();
@@ -1463,9 +1590,9 @@
         function generateQRCode() {
             const upiURL = `upi://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${encodeURIComponent(PAYMENT_CONFIG.payeeName)}&am=${PAYMENT_CONFIG.amount}&cu=${PAYMENT_CONFIG.currency}`;
             const qrElement = document.getElementById('qrcode');
-            
+
             qrElement.innerHTML = '';
-            
+
             QRCode.toCanvas(qrElement, upiURL, {
                 width: 250,
                 margin: 2,
@@ -1474,7 +1601,7 @@
                     light: '#ffffff'
                 },
                 errorCorrectionLevel: 'H'
-            }, function(error) {
+            }, function (error) {
                 if (error) {
                     qrElement.innerHTML = `
                         <div class="qr-error">
@@ -1491,7 +1618,7 @@
             const summaryElement = document.getElementById('registration-summary');
             const game = localStorage.getItem('currentGame') || sessionStorage.getItem('currentGame') || 'Tournament';
             const teamName = localStorage.getItem('teamName') || sessionStorage.getItem('teamName') || 'Your Team';
-            
+
             if (summaryElement) {
                 summaryElement.innerHTML = `
                     <div class="registration-summary card">
@@ -1523,14 +1650,14 @@
 
         function setupEventListeners() {
             // Copy UPI ID functionality
-            window.copyUpiId = function() {
+            window.copyUpiId = function () {
                 navigator.clipboard.writeText(PAYMENT_CONFIG.upiId)
                     .then(() => {
                         const copyBtn = document.querySelector('.copy-btn');
                         const originalHTML = copyBtn.innerHTML;
                         copyBtn.innerHTML = '<i class="fas fa-check"></i>';
                         copyBtn.style.color = 'var(--success)';
-                        
+
                         setTimeout(() => {
                             copyBtn.innerHTML = originalHTML;
                             copyBtn.style.color = '';
@@ -1540,14 +1667,14 @@
             };
 
             // UPI app redirects
-            window.redirectToUpi = function(app) {
+            window.redirectToUpi = function (app) {
                 const urls = {
                     gpay: `tez://upi/pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`,
                     phonepe: `phonepe://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`,
                     paytm: `paytmmp://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`,
                     bhim: `bhim://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`
                 };
-                
+
                 if (urls[app]) {
                     window.location.href = urls[app];
                     setTimeout(() => {
@@ -1560,27 +1687,27 @@
             };
 
             // Manual instructions
-            window.showManualInstructions = function() {
+            window.showManualInstructions = function () {
                 alert(`Manual Payment Instructions:\n\n1. Open your UPI app (GPay, PhonePe, Paytm, etc.)\n2. Tap on "Scan QR Code"\n3. Scan the QR code above\n4. Enter amount: ₹${PAYMENT_CONFIG.amount}\n5. Complete the payment\n6. Save the transaction ID\n\nUPI ID: ${PAYMENT_CONFIG.upiId}`);
             };
 
             // Payment verification
-            window.verifyPayment = async function() {
+            window.verifyPayment = async function () {
                 const transactionId = document.getElementById('transaction-id').value.trim();
                 const verifyButton = document.querySelector('.verify-button');
                 const successMessage = document.getElementById('success-message');
                 const errorMessage = document.getElementById('error-message');
-                
+
                 // Hide previous messages
                 successMessage.style.display = 'none';
                 errorMessage.style.display = 'none';
-                
+
                 // Validate transaction ID
                 if (!transactionId) {
                     showError('Please enter your transaction ID');
                     return;
                 }
-                
+
                 // Validate format (basic UPI transaction ID pattern)
                 const transactionPatterns = [
                     /^[A-Z0-9]{8,20}$/i,
@@ -1588,37 +1715,37 @@
                     /^[0-9]{12,16}$/,
                     /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/i
                 ];
-                
+
                 const isValidFormat = transactionPatterns.some(pattern => pattern.test(transactionId));
                 if (!isValidFormat) {
                     showError('Invalid transaction ID format. Please enter a valid UPI transaction ID.');
                     return;
                 }
-                
+
                 // Show loading state
                 const originalText = verifyButton.innerHTML;
                 verifyButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
                 verifyButton.disabled = true;
-                
+
                 try {
                     // Simulate verification (replace with actual API call)
                     await simulateVerification(transactionId);
-                    
+
                     // Show success
                     verifyButton.innerHTML = '<i class="fas fa-check-circle"></i> Verified!';
                     verifyButton.style.background = 'linear-gradient(45deg, var(--success), #3aa83a)';
                     verifyButton.disabled = true;
-                    
+
                     successMessage.style.display = 'flex';
-                    
+
                     // Save to localStorage
                     localStorage.setItem('paymentVerified', 'true');
                     localStorage.setItem('transactionId', transactionId);
                     localStorage.setItem('paymentTime', new Date().toISOString());
-                    
+
                     // Start countdown to redirect
                     startRedirectCountdown();
-                    
+
                 } catch (error) {
                     // Show error
                     verifyButton.innerHTML = originalText;
@@ -1632,7 +1759,7 @@
                     setTimeout(() => {
                         // Simulate 80% success rate for demo
                         const isSuccess = Math.random() > 0.2;
-                        
+
                         if (isSuccess) {
                             resolve({
                                 success: true,
@@ -1656,16 +1783,16 @@
             function startRedirectCountdown() {
                 let seconds = Math.floor(PAYMENT_CONFIG.successRedirectDelay / 1000);
                 const successMessage = document.getElementById('success-message');
-                
+
                 const countdownInterval = setInterval(() => {
                     successMessage.querySelector('p').innerHTML = `
                         <strong>Payment Verified Successfully!</strong><br>
                         Your registration is now complete.<br>
                         <small>Redirecting to homepage in ${seconds} seconds...</small>
                     `;
-                    
+
                     seconds--;
-                    
+
                     if (seconds <= 0) {
                         clearInterval(countdownInterval);
                         window.location.href = 'index.html';
@@ -1675,4 +1802,5 @@
         }
     </script>
 </body>
+
 </html>
