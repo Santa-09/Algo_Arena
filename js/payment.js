@@ -1,12 +1,10 @@
 /**
- * Payment Handler – FINAL WORKING VERSION
+ * Payment Handler – Direct DB Linking
  */
 
 if (!window.PAYMENT_CONFIG) {
     window.PAYMENT_CONFIG = {
-        upiId: '9692699132@fam',
-        amount: 20,
-        homePage: 'index.html'
+        amount: 20
     };
 }
 
@@ -17,13 +15,12 @@ class PaymentHandler {
         this.success = document.getElementById('success-message');
         this.error = document.getElementById('error-message');
 
-        this.data =
-            Session.getRegistration('freefire') ||
-            Session.getRegistration('valorant');
+        const params = new URLSearchParams(window.location.search);
+        this.game = params.get('game');
+        this.registrationId = params.get('id');
 
-        if (!this.data) {
-            alert('No registration data found');
-            window.location.href = 'index.html';
+        if (!this.game || !this.registrationId) {
+            alert('Invalid payment access');
             return;
         }
 
@@ -40,7 +37,7 @@ class PaymentHandler {
         try {
             const supabase = window.getSupabase();
 
-            // 1️⃣ prevent duplicate payment
+            // Prevent duplicate transaction
             const { data: exists } = await supabase
                 .from(TABLES.PAYMENTS)
                 .select('id')
@@ -50,29 +47,30 @@ class PaymentHandler {
                 throw new Error('Transaction already used');
             }
 
-            // 2️⃣ insert registration
+            // Update registration payment status
             const table =
-                this.data.gameType === 'freefire'
+                this.game === 'freefire'
                     ? TABLES.FREE_FIRE
                     : TABLES.VALORANT;
 
-            const { error: regErr } = await supabase.from(table).insert([
-                {
-                    ...this.data,
+            const { error: updateError } = await supabase
+                .from(table)
+                .update({
                     payment_status: 'verified',
                     paid_at: new Date().toISOString()
-                }
-            ]);
+                })
+                .eq('id', this.registrationId);
 
-            if (regErr) throw regErr;
+            if (updateError) throw updateError;
 
-            // 3️⃣ insert payment record
+            // Insert payment record
             const { error: payErr } = await supabase
                 .from(TABLES.PAYMENTS)
                 .insert([
                     {
+                        registration_id: this.registrationId,
+                        game_type: this.game,
                         transaction_id: txn,
-                        game_type: this.data.gameType,
                         amount: PAYMENT_CONFIG.amount,
                         status: 'verified'
                     }
@@ -80,18 +78,11 @@ class PaymentHandler {
 
             if (payErr) throw payErr;
 
-            Session.clearRegistration('freefire');
-            Session.clearRegistration('valorant');
-
             this.showSuccess();
 
-            setTimeout(() => {
-                window.location.href = PAYMENT_CONFIG.homePage;
-            }, 3000);
-
         } catch (err) {
-            this.showError(err.message);
             console.error(err);
+            this.showError(err.message);
         } finally {
             this.verifyBtn.disabled = false;
             this.verifyBtn.innerHTML = 'Verify Payment';
