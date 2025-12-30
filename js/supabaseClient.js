@@ -6,8 +6,8 @@ console.log("✅ supabaseClient loaded");
 
 if (!window.__supabaseClient) {
     window.__supabaseClient = window.supabase.createClient(
-        'https://dgkbaeyfgvrgaampbiua.supabase.co',
-        'sb_publishable_CJ2_wPie8LH6WJSpajhBEQ_wHB82YvG'
+        'https://yauefpmvpvwmydnappay.supabase.co',
+        'sb_publishable_R04u-Rjk8pmfi-6g_Q7A9g_F81e9oi5'
     );
 }
 
