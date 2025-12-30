@@ -1,31 +1,26 @@
-// js/freefire.js
-
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('freefireForm');
+    const form = document.getElementById('freeFireForm');
     if (!form) return;
 
-    console.log('✅ Free Fire form loaded');
+    console.log('✅ freefire.js loaded');
 
     form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // 🔥 STOPS PAGE RELOAD
+        console.log('🛑 Form submit intercepted');
 
-        const supabase = window.getSupabase();
+        const submitBtn = form.querySelector('.form-submit');
+        submitBtn.disabled = true;
+
+        const supabase = window.getSupabase(); // from supabaseClient.js
         const formData = new FormData(form);
 
-        // ✅ collect tournament types correctly
-        const tournamentTypes = [];
-        document
-            .querySelectorAll('input[name="tournament_types[]"]:checked')
-            .forEach(cb => tournamentTypes.push(cb.value));
-
-        // ✅ payload MUST match DB column names
+        // Build payload EXACTLY matching Supabase columns
         const payload = {
             fullname: formData.get('fullname'),
             email: formData.get('email'),
             phone: formData.get('phone'),
             country: formData.get('country'),
-            timezone: formData.get('timezone') || null,
-            team_name: formData.get('team_name') || null,
+            team_name: formData.get('team_name'),
 
             player1_name: formData.get('player1_name'),
             player1_uid: formData.get('player1_uid'),
@@ -41,32 +36,31 @@ document.addEventListener('DOMContentLoaded', () => {
             player6_name: formData.get('player6_name') || null,
             player6_uid: formData.get('player6_uid') || null,
 
-            tournament_types: tournamentTypes, // ✅ NO []
-            terms: formData.get('terms') === 'on',
-
             game_type: 'freefire',
-            payment_status: 'pending'
+            payment_status: 'pending',
+            created_at: new Date().toISOString()
         };
 
-        console.log('📦 Sending Free Fire payload:', payload);
+        console.log('📦 Payload:', payload);
 
         try {
             const { data, error } = await supabase
                 .from('freefire_registrations')
                 .insert([payload])
-                .select('id')   // ✅ CORRECT
-                .single();      // ✅ CORRECT
+                .select('id')
+                .single();
 
             if (error) throw error;
 
-            console.log('✅ Free Fire registered:', data.id);
+            console.log('✅ Inserted ID:', data.id);
 
-            // redirect to payment
+            // redirect manually (NO reload)
             window.location.href = `payment.html?game=freefire&id=${data.id}`;
 
         } catch (err) {
-            console.error('❌ Insert failed:', err);
-            alert(err.message || 'Registration failed');
+            console.error('❌ Supabase error:', err);
+            alert(err.message);
+            submitBtn.disabled = false;
         }
     });
 });
