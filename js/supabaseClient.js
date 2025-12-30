@@ -7,8 +7,8 @@ console.log("✅ supabaseClient.js loaded");
 
 // Create Supabase client ONLY once
 if (!window.__supabaseClient) {
-    const SUPABASE_URL = 'https://dgkbaeyfgvrgaampbiua.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_CJ2_wPie8LH6WJSpajhBEQ_wHB82YvG';
+    const SUPABASE_URL = 'https://yauefpmvpvwmydnappay.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_R04u-Rjk8pmfi-6g_Q7A9g_F81e9oi5';
 
     window.__supabaseClient = window.supabase.createClient(
         SUPABASE_URL,
