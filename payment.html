@@ -71,7 +71,12 @@
         }
 
         /* Typography */
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: var(--spacing-md);
@@ -105,16 +110,45 @@
             text-align: center;
         }
 
-        .mb-1 { margin-bottom: var(--spacing-xs); }
-        .mb-2 { margin-bottom: var(--spacing-sm); }
-        .mb-3 { margin-bottom: var(--spacing-md); }
-        .mb-4 { margin-bottom: var(--spacing-lg); }
-        .mb-5 { margin-bottom: var(--spacing-xl); }
-        .mt-2 { margin-top: var(--spacing-sm); }
-        .mt-3 { margin-top: var(--spacing-md); }
-        .mt-4 { margin-top: var(--spacing-lg); }
-        .mt-5 { margin-top: var(--spacing-xl); }
-        .w-100 { width: 100%; }
+        .mb-1 {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .mb-2 {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .mb-3 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .mb-4 {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .mb-5 {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .mt-2 {
+            margin-top: var(--spacing-sm);
+        }
+
+        .mt-3 {
+            margin-top: var(--spacing-md);
+        }
+
+        .mt-4 {
+            margin-top: var(--spacing-lg);
+        }
+
+        .mt-5 {
+            margin-top: var(--spacing-xl);
+        }
+
+        .w-100 {
+            width: 100%;
+        }
 
         .text-gradient {
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-yellow));
@@ -1077,9 +1111,10 @@
     </footer>
 
     <!-- JavaScript Files -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="./js/supabaseClient.js"></script>
     <script src="./js/payment.js"></script>
+
 </body>
 
 </html>
