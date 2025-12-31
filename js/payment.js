@@ -27,16 +27,16 @@ class PaymentHandler {
         try {
             // Load registration data first
             await this.loadRegistrationSummary();
-            
+
             // Generate QR code
             this.generateQRCode();
-            
+
             // Setup UPI link
             this.setupUpiLink();
-            
+
             // Setup event listeners
             this.setupEventListeners();
-            
+
             // Setup payment verification
             this.setupVerification();
         } catch (error) {
@@ -48,14 +48,14 @@ class PaymentHandler {
         try {
             const upiURL = `upi://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${encodeURIComponent(PAYMENT_CONFIG.payeeName)}&am=${PAYMENT_CONFIG.amount}&cu=${PAYMENT_CONFIG.currency}`;
             const qrElement = document.getElementById('qrcode');
-            
+
             // Clear placeholder
             qrElement.innerHTML = '';
-            
+
             // Create canvas for QR code
             const canvas = document.createElement('canvas');
             qrElement.appendChild(canvas);
-            
+
             // Generate QR code
             QRCode.toCanvas(canvas, upiURL, {
                 width: 200,
@@ -103,7 +103,7 @@ class PaymentHandler {
 
             // Display summary
             const gameName = this.getGameName(game);
-            
+
             summaryElement.innerHTML = `
                 <div class="registration-summary card">
                     <div class="summary-header">
@@ -158,10 +158,10 @@ class PaymentHandler {
     setupEventListeners() {
         // Copy UPI ID
         window.copyUpiId = () => this.copyToClipboard(PAYMENT_CONFIG.upiId, 'UPI ID');
-        
+
         // UPI App redirects
         window.redirectToUpi = (app) => this.redirectToUpiApp(app);
-        
+
         // Manual instructions
         window.showManualInstructions = () => this.showManualInstructions();
     }
@@ -197,7 +197,7 @@ class PaymentHandler {
 
         const url = appURLs[app] || `upi://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`;
         window.location.href = url;
-        
+
         // Fallback after 1 second
         setTimeout(() => {
             if (!document.hasFocus()) {
@@ -215,7 +215,7 @@ class PaymentHandler {
 5. Complete the payment
 6. Save the transaction ID\n\n
 UPI ID: ${PAYMENT_CONFIG.upiId}`;
-        
+
         alert(instructions);
     }
 
@@ -331,18 +331,21 @@ UPI ID: ${PAYMENT_CONFIG.upiId}`;
             if (updateError) throw updateError;
 
             // Insert payment record
-            const { error: paymentError } = await supabase
-                .from(TABLES.PAYMENTS)
+            const { error: payErr } = await supabase
+                .from("payments")
                 .insert([{
                     registration_id: registrationId,
                     game_type: game,
-                    transaction_id: transactionId,
-                    amount: PAYMENT_CONFIG.amount,
-                    status: 'verified',
-                    verified_at: new Date().toISOString()
+                    transaction_id: txn,
+                    amount: AMOUNT,
+                    status: "verified"
                 }]);
 
-            if (paymentError) throw paymentError;
+            if (payErr) {
+                console.error("❌ Payment insert error:", payErr);
+                throw payErr;
+            }
+            console.log('✅ Payment verified for registration ID:', registrationId);
 
             // Save to localStorage
             localStorage.setItem('paymentVerified', 'true');
@@ -362,7 +365,7 @@ UPI ID: ${PAYMENT_CONFIG.upiId}`;
             setTimeout(() => {
                 // For demo purposes - simulate 80% success rate
                 const isSuccess = Math.random() > 0.2;
-                
+
                 if (isSuccess) {
                     // Save to localStorage for demo
                     localStorage.setItem('paymentVerified', 'true');
@@ -392,7 +395,7 @@ UPI ID: ${PAYMENT_CONFIG.upiId}`;
             if (errorText) errorText.textContent = message;
             errorMessage.style.display = 'flex';
             errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
+
             const successMessage = document.getElementById('success-message');
             if (successMessage) successMessage.style.display = 'none';
         }
@@ -401,7 +404,7 @@ UPI ID: ${PAYMENT_CONFIG.upiId}`;
     startRedirectCountdown() {
         let seconds = Math.floor(PAYMENT_CONFIG.successRedirectDelay / 1000);
         const successMessage = document.getElementById('success-message');
-        
+
         if (!successMessage) return;
 
         const countdownInterval = setInterval(() => {
@@ -431,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
-    
+
     // Initialize payment handler
     new PaymentHandler();
 });
