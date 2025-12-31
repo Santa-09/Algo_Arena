@@ -46,31 +46,40 @@ class PaymentHandler {
 
     generateQRCode() {
         try {
-            const upiURL = `upi://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${encodeURIComponent(PAYMENT_CONFIG.payeeName)}&am=${PAYMENT_CONFIG.amount}&cu=${PAYMENT_CONFIG.currency}`;
-            const qrElement = document.getElementById('qrcode');
+            const upiURL =
+                `upi://pay?pa=${PAYMENT_CONFIG.upiId}` +
+                `&pn=${encodeURIComponent(PAYMENT_CONFIG.payeeName)}` +
+                `&am=${PAYMENT_CONFIG.amount}` +
+                `&cu=${PAYMENT_CONFIG.currency}`;
+
+            const qrElement = document.getElementById("qrcode");
+            if (!qrElement) return;
 
             // Clear placeholder
-            qrElement.innerHTML = '';
+            qrElement.innerHTML = "";
 
-            // Create canvas for QR code
-            const canvas = document.createElement('canvas');
-            qrElement.appendChild(canvas);
+            // Safety check
+            if (typeof QRCode === "undefined") {
+                throw new Error("QRCode library not loaded");
+            }
 
-            // Generate QR code
-            QRCode.toCanvas(canvas, upiURL, {
-                width: 200,
-                margin: 1,
-                color: {
-                    dark: '#000000',
-                    light: '#ffffff'
-                },
-                errorCorrectionLevel: 'M'
+            // Generate QR (qrcodejs style)
+            new QRCode(qrElement, {
+                text: upiURL,
+                width: 220,
+                height: 220,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.M
             });
+
+            console.log("✅ QR code generated successfully");
         } catch (error) {
-            console.error('QR Code generation error:', error);
+            console.error("QR Code generation error:", error);
             this.showQRError();
         }
     }
+
 
     showQRError() {
         const qrElement = document.getElementById('qrcode');
@@ -332,14 +341,16 @@ UPI ID: ${PAYMENT_CONFIG.upiId}`;
 
             // Insert payment record
             const { error: payErr } = await supabase
-                .from("payments")
+                .from(TABLES.PAYMENTS)
                 .insert([{
                     registration_id: registrationId,
                     game_type: game,
-                    transaction_id: txn,
-                    amount: AMOUNT,
-                    status: "verified"
+                    transaction_id: transactionId,
+                    amount: PAYMENT_CONFIG.amount,
+                    status: "verified",
+                    created_at: new Date().toISOString()
                 }]);
+
 
             if (payErr) {
                 console.error("❌ Payment insert error:", payErr);
