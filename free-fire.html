@@ -1460,7 +1460,7 @@
                 <!-- Terms and Conditions -->
                 <div class="form-group terms-section">
                     <div class="checkbox-group">
-                        <input type="checkbox" id="ff-terms" name="terms" required>
+                        <input type="checkbox" id="ff-terms" name="terms">
                         <label for="ff-terms">
                             I agree to the <a href="#terms" target="_blank">tournament rules</a> and <a href="#privacy"
                                 target="_blank">code of conduct</a>
@@ -1534,50 +1534,6 @@
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="./js/supabaseClient.js"></script>
     <script src="./js/freefire.js"></script>
-
-    <script>
-        // Additional Free Fire specific JS
-        document.addEventListener('DOMContentLoaded', function () {
-            // UID validation helper
-            const uidInputs = document.querySelectorAll('input[id$="-uid"]');
-            uidInputs.forEach(input => {
-                input.addEventListener('blur', function () {
-                    const value = this.value.trim();
-                    if (value && !/^\d{8,12}$/.test(value)) {
-                        showFieldError(this, 'UID must be 8-12 digits');
-                    }
-                });
-            });
-
-            // Player name suggestions for team name
-            const player1Input = document.getElementById('player1-name');
-            const teamNameInput = document.getElementById('ff-teamname');
-
-            if (player1Input && teamNameInput) {
-                player1Input.addEventListener('blur', function () {
-                    if (!teamNameInput.value) {
-                        const name = this.value.trim().split(' ')[0];
-                        if (name) {
-                            teamNameInput.value = name + '_Squad';
-                        }
-                    }
-                });
-            }
-        });
-
-        function showFieldError(field, message) {
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error-message';
-            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-
-            const parent = field.parentElement;
-            const existingError = parent.querySelector('.error-message');
-            if (existingError) existingError.remove();
-
-            parent.appendChild(errorDiv);
-            field.classList.add('error');
-        }
-    </script>
 </body>
 
 </html>

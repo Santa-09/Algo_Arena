@@ -1525,7 +1525,7 @@
                 <!-- Terms and Conditions -->
                 <div class="form-group terms-section">
                     <div class="checkbox-group">
-                        <input type="checkbox" id="val-terms" name="terms" required>
+                        <input type="checkbox" id="val-terms" name="terms">
                         <label for="val-terms">
                             I agree to the <a href="#terms" target="_blank">tournament rules</a> and <a href="#privacy"
                                 target="_blank">code of conduct</a>
@@ -1599,76 +1599,6 @@
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="./js/supabaseClient.js"></script>
     <script src="./js/valorant.js"></script>
-
-    <script>
-        // Additional Valorant specific JS
-        document.addEventListener('DOMContentLoaded', function () {
-            // Riot ID validation helper
-            const riotIdInputs = document.querySelectorAll('input[id$="-riotid"]');
-            riotIdInputs.forEach(input => {
-                input.addEventListener('blur', function () {
-                    const value = this.value.trim();
-                    if (value && !/^[\w\s]+#[\w\d]+$/.test(value)) {
-                        showFieldError(this, 'Format: Name#Tag (e.g., AlgoArena#1234)');
-                    }
-                });
-            });
-
-            // Team name auto-generation
-            const player1Input = document.getElementById('player1-name');
-            const teamNameInput = document.getElementById('val-teamname');
-
-            if (player1Input && teamNameInput) {
-                player1Input.addEventListener('blur', function () {
-                    if (!teamNameInput.value) {
-                        const name = this.value.trim().split(' ')[0];
-                        if (name) {
-                            teamNameInput.value = name + '_Legion';
-                        }
-                    }
-                });
-            }
-
-            // Rank selector styling
-            const rankSelect = document.getElementById('val-rating');
-            if (rankSelect) {
-                rankSelect.addEventListener('change', function () {
-                    const colors = {
-                        'iron': '#939393',
-                        'bronze': '#CD7F32',
-                        'silver': '#C0C0C0',
-                        'gold': '#FFD700',
-                        'platinum': '#00CED1',
-                        'diamond': '#B9F2FF',
-                        'ascendant': '#9400D3',
-                        'immortal': '#DC143C',
-                        'radiant': '#FF4500'
-                    };
-
-                    if (colors[this.value]) {
-                        this.style.color = colors[this.value];
-                        this.style.borderColor = colors[this.value];
-                    } else {
-                        this.style.color = '';
-                        this.style.borderColor = '';
-                    }
-                });
-            }
-        });
-
-        function showFieldError(field, message) {
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error-message';
-            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-
-            const parent = field.parentElement;
-            const existingError = parent.querySelector('.error-message');
-            if (existingError) existingError.remove();
-
-            parent.appendChild(errorDiv);
-            field.classList.add('error');
-        }
-    </script>
 </body>
 
 </html>

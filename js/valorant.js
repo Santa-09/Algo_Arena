@@ -1,76 +1,97 @@
-// js/valorant.js
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("✅ valorant.js loaded");
 
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('valorantForm');
-    if (!form) return;
+  const form = document.getElementById("valorantForm");
+  if (!form) {
+    console.error("❌ valorantForm not found");
+    return;
+  }
 
-    console.log('✅ Valorant form loaded');
+  // 🔒 Last line of defense (NO reload ever)
+  document.addEventListener("submit", e => {
+    if (e.target.id === "valorantForm") {
+      e.preventDefault();
+    }
+  });
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    console.log("🛑 Valorant submit intercepted");
 
-        const supabase = window.getSupabase();
-        const formData = new FormData(form);
+    const submitBtn = form.querySelector(".form-submit");
+    submitBtn.disabled = true;
 
-        // ✅ collect tournament types (checkboxes)
-        const tournamentTypes = [];
-        document
-            .querySelectorAll('input[name="tournament_types[]"]:checked')
-            .forEach(cb => tournamentTypes.push(cb.value));
+    let supabase;
+    try {
+      supabase = window.getSupabase();
+    } catch {
+      alert("Supabase not initialized");
+      submitBtn.disabled = false;
+      return;
+    }
 
-        // ✅ build clean payload (ONLY DB COLUMNS)
-        const data = {
-            fullname: formData.get('fullname'),
-            email: formData.get('email'),
-            phone: formData.get('phone'),
-            country: formData.get('country'),
-            team_name: formData.get('team_name') || null,
+    const formData = new FormData(form);
 
-            player1_name: formData.get('player1_name'),
-            player1_riotid: formData.get('player1_riotid'),
-            player2_name: formData.get('player2_name'),
-            player2_riotid: formData.get('player2_riotid'),
-            player3_name: formData.get('player3_name'),
-            player3_riotid: formData.get('player3_riotid'),
-            player4_name: formData.get('player4_name'),
-            player4_riotid: formData.get('player4_riotid'),
-            player5_name: formData.get('player5_name'),
-            player5_riotid: formData.get('player5_riotid'),
+    // ✅ Collect tournament types
+    const tournamentTypes = [];
+    document
+      .querySelectorAll('input[name="tournament_types[]"]:checked')
+      .forEach(cb => tournamentTypes.push(cb.value));
 
-            substitute1_name: formData.get('player6_name') || null,
-            substitute1_riotid: formData.get('player6_riotid') || null,
-            substitute2_name: formData.get('player7_name') || null,
-            substitute2_riotid: formData.get('player7_riotid') || null,
+    // ✅ Collect multi-select playstyle
+    const playstyle = formData.getAll("playstyle");
 
-            server: formData.get('server'),
-            current_rank: formData.get('current_rank') || null,
-            playstyle: formData.getAll('playstyle'),
+    const payload = {
+      fullname: formData.get("fullname"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      country: formData.get("country"),
+      team_name: formData.get("team_name") || null,
 
-            tournament_types: tournamentTypes,
-            game_type: 'valorant',
-            payment_status: 'pending',
-            created_at: new Date().toISOString()
-        };
+      player1_name: formData.get("player1_name"),
+      player1_riotid: formData.get("player1_riotid"),
+      player2_name: formData.get("player2_name"),
+      player2_riotid: formData.get("player2_riotid"),
+      player3_name: formData.get("player3_name"),
+      player3_riotid: formData.get("player3_riotid"),
+      player4_name: formData.get("player4_name"),
+      player4_riotid: formData.get("player4_riotid"),
+      player5_name: formData.get("player5_name"),
+      player5_riotid: formData.get("player5_riotid"),
 
-        console.log('📦 Sending Valorant data:', data);
+      substitute1_name: formData.get("player6_name") || null,
+      substitute1_riotid: formData.get("player6_riotid") || null,
+      substitute2_name: formData.get("player7_name") || null,
+      substitute2_riotid: formData.get("player7_riotid") || null,
 
-        try {
-            const { data: inserted, error } = await supabase
-                .from('valorant_registrations')
-                .insert([data])
-                .select('id')
-                .single();
+      tournament_types: tournamentTypes,
+      server: formData.get("server"),
+      current_rank: formData.get("current_rank") || null,
+      playstyle: playstyle,
 
-            if (error) throw error;
+      game_type: "valorant",
+      payment_status: "pending",
+      created_at: new Date().toISOString()
+    };
 
-            console.log('✅ Valorant registered:', inserted.id);
+    console.log("📦 Valorant Payload:", payload);
 
-            // 👉 redirect to payment page with ID
-            window.location.href = `payment.html?game=valorant&id=${inserted.id}`;
+    try {
+      const { data, error } = await supabase
+        .from("valorant_registrations")
+        .insert([payload])
+        .select("id")
+        .single();
 
-        } catch (err) {
-            console.error('❌ Valorant insert failed:', err);
-            alert('Registration failed. Check console.');
-        }
-    });
+      if (error) throw error;
+
+      console.log("✅ Valorant registered:", data.id);
+
+      window.location.href = `payment.html?game=valorant&id=${data.id}`;
+    } catch (err) {
+      console.error("❌ Valorant insert failed:", err);
+      alert(err.message);
+      submitBtn.disabled = false;
+    }
+  });
 });

@@ -10,11 +10,9 @@
     <link rel="shortcut icon" href="../public/algo-arena.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <style>
         /* Base Styles & Variables */
         :root {
-            /* Color Palette */
             --primary: #0f0f23;
             --secondary: #1a1a2e;
             --accent-blue: #0f8bff;
@@ -24,60 +22,32 @@
             --success: #4bb543;
             --warning: #ffa500;
             --error: #ff3333;
-
-            /* Text Colors */
             --text: #ffffff;
             --text-secondary: #b0b0c0;
             --text-muted: #888899;
-
-            /* Spacing */
             --spacing-xs: 0.25rem;
             --spacing-sm: 0.5rem;
             --spacing-md: 1rem;
             --spacing-lg: 1.5rem;
             --spacing-xl: 2rem;
             --spacing-xxl: 3rem;
-
-            /* Typography */
             --font-primary: 'Poppins', sans-serif;
             --font-mono: 'Courier New', monospace;
-
-            /* Font Sizes */
-            --fs-xs: 0.75rem;
-            --fs-sm: 0.875rem;
-            --fs-base: 1rem;
-            --fs-md: 1.125rem;
-            --fs-lg: 1.25rem;
-            --fs-xl: 1.5rem;
-            --fs-xxl: 2rem;
-            --fs-xxxl: 3rem;
-
-            /* Border Radius */
             --radius-sm: 4px;
             --radius-md: 8px;
             --radius-lg: 12px;
             --radius-xl: 16px;
             --radius-round: 50%;
-
-            /* Shadows */
             --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
             --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
             --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
             --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.4);
-
-            /* Transitions */
             --transition-fast: 0.2s ease;
             --transition-normal: 0.3s ease;
             --transition-slow: 0.5s ease;
-
-            /* Gradients */
-            --gradient-primary: linear-gradient(135deg, var(--accent-blue), #4654ff);
-            --gradient-secondary: linear-gradient(135deg, var(--accent-red), #ff2e4a);
-            --gradient-dark: linear-gradient(135deg, var(--primary), #1a1a2e);
-            --gradient-glow: radial-gradient(circle at center, rgba(15, 139, 255, 0.15), transparent 70%);
         }
 
-        /* Reset & Base Styles */
+        /* Reset */
         * {
             margin: 0;
             padding: 0;
@@ -101,54 +71,27 @@
         }
 
         /* Typography */
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
+        h1, h2, h3, h4, h5, h6 {
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: var(--spacing-md);
         }
 
-        h1 {
-            font-size: var(--fs-xxxl);
-        }
-
         h2 {
-            font-size: var(--fs-xxl);
+            font-size: 2.5rem;
         }
 
         h3 {
-            font-size: var(--fs-xl);
+            font-size: 1.5rem;
         }
 
         h4 {
-            font-size: var(--fs-lg);
-        }
-
-        h5 {
-            font-size: var(--fs-md);
-        }
-
-        h6 {
-            font-size: var(--fs-base);
+            font-size: 1.25rem;
         }
 
         p {
             margin-bottom: var(--spacing-md);
             color: var(--text-secondary);
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: color var(--transition-fast);
-        }
-
-        a:hover {
-            color: var(--accent-yellow);
         }
 
         /* Utility Classes */
@@ -162,147 +105,22 @@
             text-align: center;
         }
 
-        .text-left {
-            text-align: left;
-        }
-
-        .text-right {
-            text-align: right;
-        }
+        .mb-1 { margin-bottom: var(--spacing-xs); }
+        .mb-2 { margin-bottom: var(--spacing-sm); }
+        .mb-3 { margin-bottom: var(--spacing-md); }
+        .mb-4 { margin-bottom: var(--spacing-lg); }
+        .mb-5 { margin-bottom: var(--spacing-xl); }
+        .mt-2 { margin-top: var(--spacing-sm); }
+        .mt-3 { margin-top: var(--spacing-md); }
+        .mt-4 { margin-top: var(--spacing-lg); }
+        .mt-5 { margin-top: var(--spacing-xl); }
+        .w-100 { width: 100%; }
 
         .text-gradient {
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-yellow));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .mb-1 {
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .mb-2 {
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .mb-3 {
-            margin-bottom: var(--spacing-md);
-        }
-
-        .mb-4 {
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .mb-5 {
-            margin-bottom: var(--spacing-xl);
-        }
-
-        .mt-1 {
-            margin-top: var(--spacing-xs);
-        }
-
-        .mt-2 {
-            margin-top: var(--spacing-sm);
-        }
-
-        .mt-3 {
-            margin-top: var(--spacing-md);
-        }
-
-        .mt-4 {
-            margin-top: var(--spacing-lg);
-        }
-
-        .mt-5 {
-            margin-top: var(--spacing-xl);
-        }
-
-        .mr-1 {
-            margin-right: var(--spacing-xs);
-        }
-
-        .mr-2 {
-            margin-right: var(--spacing-sm);
-        }
-
-        .mr-3 {
-            margin-right: var(--spacing-md);
-        }
-
-        .ml-1 {
-            margin-left: var(--spacing-xs);
-        }
-
-        .ml-2 {
-            margin-left: var(--spacing-sm);
-        }
-
-        .ml-3 {
-            margin-left: var(--spacing-md);
-        }
-
-        .p-1 {
-            padding: var(--spacing-xs);
-        }
-
-        .p-2 {
-            padding: var(--spacing-sm);
-        }
-
-        .p-3 {
-            padding: var(--spacing-md);
-        }
-
-        .p-4 {
-            padding: var(--spacing-lg);
-        }
-
-        .p-5 {
-            padding: var(--spacing-xl);
-        }
-
-        .flex {
-            display: flex;
-        }
-
-        .flex-center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .flex-between {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .flex-column {
-            flex-direction: column;
-        }
-
-        .flex-wrap {
-            flex-wrap: wrap;
-        }
-
-        .grid {
-            display: grid;
-        }
-
-        .w-100 {
-            width: 100%;
-        }
-
-        .h-100 {
-            height: 100%;
-        }
-
-        .relative {
-            position: relative;
-        }
-
-        .absolute {
-            position: absolute;
         }
 
         /* Buttons */
@@ -314,7 +132,7 @@
             padding: 0.75rem 1.5rem;
             border-radius: var(--radius-md);
             font-weight: 600;
-            font-size: var(--fs-sm);
+            font-size: 0.875rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             border: none;
@@ -341,11 +159,6 @@
             left: 100%;
         }
 
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
         .btn-primary {
             background: linear-gradient(45deg, var(--accent-blue), #4654ff);
             color: white;
@@ -355,19 +168,6 @@
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: linear-gradient(45deg, var(--accent-red), #ff2e4a);
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            color: white;
         }
 
         .btn-outline {
@@ -380,16 +180,6 @@
             border-color: var(--accent-yellow);
             color: var(--accent-yellow);
             transform: translateY(-2px);
-        }
-
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: var(--fs-xs);
-        }
-
-        .btn-large {
-            padding: 1rem 2rem;
-            font-size: var(--fs-md);
         }
 
         /* Navigation */
@@ -426,102 +216,12 @@
         }
 
         .nav-brand h1 {
-            font-size: var(--fs-lg);
+            font-size: 1.125rem;
             margin: 0;
             background: linear-gradient(45deg, var(--accent-blue), var(--accent-yellow));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-lg);
-            list-style: none;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            font-weight: 500;
-            position: relative;
-            padding: var(--spacing-sm) 0;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-yellow));
-            transition: width var(--transition-normal);
-        }
-
-        .nav-link:hover {
-            color: var(--text);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: var(--spacing-sm);
-        }
-
-        .hamburger span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--text);
-            transition: all var(--transition-normal);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100vh;
-            background: var(--secondary);
-            z-index: 1001;
-            transition: right var(--transition-normal);
-            padding: var(--spacing-xl);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .mobile-menu.active {
-            right: 0;
-        }
-
-        .mobile-menu .nav-menu {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: var(--spacing-lg);
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-        }
-
-        .overlay.active {
-            display: block;
         }
 
         /* Hero Section */
@@ -543,7 +243,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: var(--gradient-glow);
+            background: radial-gradient(circle at center, rgba(15, 139, 255, 0.15), transparent 70%);
             opacity: 0.5;
         }
 
@@ -553,58 +253,8 @@
             text-align: center;
         }
 
-        .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: var(--spacing-lg);
-            background: linear-gradient(45deg, var(--accent-blue), var(--accent-yellow));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow 3s ease-in-out infinite alternate;
-        }
-
-        .hero-description {
-            font-size: var(--fs-lg);
-            max-width: 800px;
-            margin: 0 auto var(--spacing-xl);
-            color: var(--text-secondary);
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: var(--spacing-md);
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px rgba(15, 139, 255, 0.3);
-            }
-
-            to {
-                text-shadow: 0 0 20px rgba(15, 139, 255, 0.6),
-                    0 0 30px rgba(255, 204, 0, 0.4);
-            }
-        }
-
-        /* Sections */
-        .section {
-            padding: var(--spacing-xxl) 0;
-            position: relative;
-        }
-
-        .section.bg-secondary {
-            background: var(--secondary);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--spacing-xxl);
-        }
-
         .section-title {
-            font-size: var(--fs-xxl);
+            font-size: 2.5rem;
             margin-bottom: var(--spacing-md);
             position: relative;
             display: inline-block;
@@ -622,7 +272,7 @@
         }
 
         .section-subtitle {
-            font-size: var(--fs-lg);
+            font-size: 1.125rem;
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
@@ -644,303 +294,13 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* Footer */
-        .footer {
-            background: var(--secondary);
-            padding: var(--spacing-xxl) 0 var(--spacing-xl);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-xl);
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-lg);
-        }
-
-        .footer-brand {
-            max-width: 300px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .footer-logo img {
-            height: 40px;
-            width: auto;
-        }
-
-        .footer-links h4 {
-            font-size: var(--fs-md);
-            margin-bottom: var(--spacing-lg);
-            color: var(--text);
-        }
-
-        .footer-links ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: var(--spacing-sm);
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            transition: color var(--transition-fast);
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-yellow);
-        }
-
-        .footer-bottom {
-            margin-top: var(--spacing-xl);
-            padding-top: var(--spacing-lg);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        .copyright {
-            color: var(--text-muted);
-            font-size: var(--fs-sm);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: var(--fs-xl);
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                gap: var(--spacing-sm);
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 var(--spacing-md);
-            }
-
-            .hero-title {
-                font-size: 1.75rem;
-            }
-
-            .hero-description {
-                font-size: var(--fs-base);
-            }
-
-            .section {
-                padding: var(--spacing-xl) 0;
-            }
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .slide-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            animation: slideLeft 0.8s ease forwards;
-        }
-
-        .slide-right {
-            opacity: 0;
-            transform: translateX(50px);
-            animation: slideRight 0.8s ease forwards;
-        }
-
-        @keyframes slideLeft {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideRight {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Form Styles */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-xl);
-        }
-
-        .form-group {
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: var(--spacing-sm);
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .form-group label.required::after {
-            content: ' *';
-            color: var(--accent-red);
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-md);
-            color: var(--text);
-            font-family: var(--font-primary);
-            font-size: var(--fs-base);
-            transition: all var(--transition-normal);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(15, 139, 255, 0.1);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .form-group input.error,
-        .form-group select.error,
-        .form-group textarea.error {
-            border-color: var(--error);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--text-muted);
-        }
-
-        .help-text {
-            display: block;
-            margin-top: var(--spacing-xs);
-            font-size: var(--fs-sm);
-            color: var(--text-muted);
-        }
-
-        /* File Input */
-        .file-input {
+        /* Section */
+        .section {
+            padding: var(--spacing-xxl) 0;
             position: relative;
         }
 
-        .file-input input[type="file"] {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
-        .file-input-label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            padding: 0.875rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius-md);
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all var(--transition-normal);
-        }
-
-        .file-input-label:hover {
-            border-color: var(--accent-blue);
-            color: var(--text);
-        }
-
-        .file-input-label i {
-            font-size: 1.2rem;
-        }
-
-        /* Form Messages */
-        .form-message {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-            padding: var(--spacing-md);
-            border-radius: var(--radius-md);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .form-message.success {
-            background: rgba(75, 181, 67, 0.1);
-            border: 1px solid var(--success);
-            color: var(--success);
-        }
-
-        .form-message.error {
-            background: rgba(255, 51, 51, 0.1);
-            border: 1px solid var(--error);
-            color: var(--error);
-        }
-
-        .form-message i {
-            font-size: 1.2rem;
-        }
-
-        /* Payment Specific Styles */
-        .payment-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
+        /* Payment Grid */
         .payment-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -953,6 +313,7 @@
             }
         }
 
+        /* QR Code Section */
         .qr-container {
             text-align: center;
         }
@@ -998,6 +359,7 @@
             text-align: center;
         }
 
+        /* UPI Details */
         .upi-details {
             text-align: left;
             margin-top: 1.5rem;
@@ -1046,6 +408,7 @@
             background: rgba(255, 204, 0, 0.1);
         }
 
+        /* Payment Options */
         .payment-options {
             margin: 2rem 0;
         }
@@ -1084,6 +447,7 @@
             color: var(--text-secondary);
         }
 
+        /* Alternative Methods */
         .alt-methods {
             text-align: center;
             margin-top: 2rem;
@@ -1112,31 +476,111 @@
             position: relative;
         }
 
-        .upi-redirect {
+        /* Form Styles */
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group label.required::after {
+            content: ' *';
+            color: var(--accent-red);
+        }
+
+        .form-group input {
             width: 100%;
+            padding: 0.875rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            color: var(--text);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: all var(--transition-normal);
         }
 
-        .verification-section .card {
-            height: 100%;
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(15, 139, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
         }
 
-        .verification-header {
-            margin-bottom: 1.5rem;
+        .help-text {
+            display: block;
+            margin-top: var(--spacing-xs);
+            font-size: 0.875rem;
+            color: var(--text-muted);
         }
 
-        .verification-header h4 {
-            color: var(--accent-yellow);
-            margin-bottom: 0.5rem;
+        /* File Input */
+        .file-input {
+            position: relative;
         }
 
-        .transaction-form {
-            margin-top: 1rem;
+        .file-input input[type="file"] {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
         }
 
-        .payment-instructions {
-            margin-top: 2rem;
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: 0.875rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-normal);
         }
 
+        .file-input-label:hover {
+            border-color: var(--accent-blue);
+            color: var(--text);
+        }
+
+        /* Form Messages */
+        .form-message {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-message.success {
+            background: rgba(75, 181, 67, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .form-message.error {
+            background: rgba(255, 51, 51, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+
+        .form-message i {
+            font-size: 1.2rem;
+        }
+
+        /* Payment Instructions */
         .payment-instructions h5 {
             color: var(--accent-yellow);
             margin-bottom: 1rem;
@@ -1151,6 +595,7 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Notice Cards */
         .payment-notice {
             background: linear-gradient(45deg, rgba(255, 204, 0, 0.05), transparent);
             border-left: 4px solid var(--accent-yellow);
@@ -1190,6 +635,7 @@
             color: var(--accent-yellow);
         }
 
+        /* Registration Summary */
         .registration-summary {
             background: linear-gradient(45deg, rgba(15, 139, 255, 0.05), transparent);
             border-left: 4px solid var(--accent-blue);
@@ -1254,43 +700,140 @@
             border: 1px solid var(--success);
         }
 
-        /* Additional Animations */
-        .pulse {
-            animation: pulse 2s infinite;
+        /* Footer */
+        .footer {
+            background: var(--secondary);
+            padding: var(--spacing-xxl) 0 var(--spacing-xl);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(15, 139, 255, 0.4);
-            }
-
-            70% {
-                box-shadow: 0 0 0 10px rgba(15, 139, 255, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(15, 139, 255, 0);
-            }
-        }
-
-        /* Loading Spinner */
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid var(--accent-blue);
-            border-radius: var(--radius-round);
-            animation: spin 1s linear infinite;
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-xl);
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 var(--spacing-lg);
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .footer-links h4 {
+            font-size: 1.125rem;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text);
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .footer-bottom {
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
             }
 
-            100% {
-                transform: rotate(360deg);
+            .hero {
+                min-height: 30vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .section {
+                padding: var(--spacing-xl) 0;
+            }
+
+            .option-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideLeft 0.8s ease forwards;
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideRight 0.8s ease forwards;
+        }
+
+        @keyframes slideLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
     </style>
@@ -1306,36 +849,8 @@
                     <h1>ALGO ARENA</h1>
                 </a>
             </div>
-
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="index.html#about" class="nav-link">About</a></li>
-                <li><a href="index.html#games" class="nav-link">Games</a></li>
-                <li><a href="index.html#rules" class="nav-link">Rules</a></li>
-                <li><a href="free-fire.html" class="nav-link">Free Fire</a></li>
-                <li><a href="valo.html" class="nav-link">Valorant</a></li>
-            </ul>
-
-            <button class="hamburger" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </nav>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <ul class="nav-menu">
-            <li><a href="index.html" class="nav-link">Home</a></li>
-            <li><a href="index.html#about" class="nav-link">About</a></li>
-            <li><a href="index.html#games" class="nav-link">Games</a></li>
-            <li><a href="index.html#rules" class="nav-link">Rules</a></li>
-            <li><a href="free-fire.html" class="nav-link">Free Fire</a></li>
-            <li><a href="valo.html" class="nav-link">Valorant</a></li>
-        </ul>
-    </div>
-    <div class="overlay"></div>
 
     <!-- Payment Header -->
     <section class="hero bg-secondary">
@@ -1421,8 +936,7 @@
                         <!-- Alternative Methods -->
                         <div class="alt-methods">
                             <p class="separator">OR</p>
-                            <a href="upi://pay?pa=9692699132@fam&pn=Algo_Arena&am=20&cu=INR"
-                                class="btn btn-primary upi-redirect">
+                            <a href="#" id="upi-link" class="btn btn-primary upi-redirect">
                                 <i class="fas fa-external-link-alt"></i> Open UPI App
                             </a>
                             <button class="btn btn-outline mt-2" onclick="showManualInstructions()">
@@ -1453,8 +967,7 @@
                                 <div class="form-group">
                                     <label for="payment-screenshot">Payment Screenshot (Optional)</label>
                                     <div class="file-input">
-                                        <input type="file" id="payment-screenshot" name="screenshot" accept="image/*"
-                                            capture="environment">
+                                        <input type="file" id="payment-screenshot" name="screenshot" accept="image/*">
                                         <label for="payment-screenshot" class="file-input-label">
                                             <i class="fas fa-camera"></i>
                                             <span>Upload Payment Screenshot</span>
@@ -1468,7 +981,7 @@
                                     <input type="datetime-local" id="payment-time" name="payment_time">
                                 </div>
 
-                                <button type="button" class="btn btn-primary verify-button">
+                                <button type="button" class="btn btn-primary verify-button" id="verify-btn">
                                     <i class="fas fa-check-circle"></i> Verify Payment
                                 </button>
 
@@ -1554,7 +1067,6 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="free-fire.html">Free Fire</a></li>
                     <li><a href="valo.html">Valorant</a></li>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -1564,243 +1076,10 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- JavaScript Files -->
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="./js/supabaseClient.js"></script>
     <script src="./js/payment.js"></script>
-
-    <script>
-        // Payment Configuration
-        const PAYMENT_CONFIG = {
-            upiId: '9692699132@fam',
-            payeeName: 'Algo Arena',
-            amount: '20',
-            currency: 'INR',
-            successRedirectDelay: 5000
-        };
-
-        // Generate QR Code on page load
-        document.addEventListener('DOMContentLoaded', function () {
-            generateQRCode();
-            loadRegistrationSummary();
-            setupEventListeners();
-        });
-
-        function generateQRCode() {
-            const upiURL = `upi://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${encodeURIComponent(PAYMENT_CONFIG.payeeName)}&am=${PAYMENT_CONFIG.amount}&cu=${PAYMENT_CONFIG.currency}`;
-            const qrElement = document.getElementById('qrcode');
-
-            qrElement.innerHTML = '';
-
-            QRCode.toCanvas(qrElement, upiURL, {
-                width: 250,
-                margin: 2,
-                color: {
-                    dark: '#000000',
-                    light: '#ffffff'
-                },
-                errorCorrectionLevel: 'H'
-            }, function (error) {
-                if (error) {
-                    qrElement.innerHTML = `
-                        <div class="qr-error">
-                            <i class="fas fa-exclamation-triangle fa-3x"></i>
-                            <p>Failed to generate QR code. Please use UPI app directly.</p>
-                        </div>
-                    `;
-                    console.error('QR Code generation error:', error);
-                }
-            });
-        }
-
-        function loadRegistrationSummary() {
-            const summaryElement = document.getElementById('registration-summary');
-            const game = localStorage.getItem('currentGame') || sessionStorage.getItem('currentGame') || 'Tournament';
-            const teamName = localStorage.getItem('teamName') || sessionStorage.getItem('teamName') || 'Your Team';
-
-            if (summaryElement) {
-                summaryElement.innerHTML = `
-                    <div class="registration-summary card">
-                        <div class="summary-header">
-                            <h4><i class="fas fa-receipt"></i> Registration Summary</h4>
-                        </div>
-                        <div class="summary-details">
-                            <div class="detail-item">
-                                <span class="label">Game:</span>
-                                <span class="value">${game}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="label">Team:</span>
-                                <span class="value">${teamName}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="label">Amount:</span>
-                                <span class="value amount">₹${PAYMENT_CONFIG.amount}</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="label">Status:</span>
-                                <span class="status-badge pending">Payment Pending</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        function setupEventListeners() {
-            // Copy UPI ID functionality
-            window.copyUpiId = function () {
-                navigator.clipboard.writeText(PAYMENT_CONFIG.upiId)
-                    .then(() => {
-                        const copyBtn = document.querySelector('.copy-btn');
-                        const originalHTML = copyBtn.innerHTML;
-                        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-                        copyBtn.style.color = 'var(--success)';
-
-                        setTimeout(() => {
-                            copyBtn.innerHTML = originalHTML;
-                            copyBtn.style.color = '';
-                        }, 2000);
-                    })
-                    .catch(err => console.error('Copy failed:', err));
-            };
-
-            // UPI app redirects
-            window.redirectToUpi = function (app) {
-                const urls = {
-                    gpay: `tez://upi/pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`,
-                    phonepe: `phonepe://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`,
-                    paytm: `paytmmp://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`,
-                    bhim: `bhim://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`
-                };
-
-                if (urls[app]) {
-                    window.location.href = urls[app];
-                    setTimeout(() => {
-                        // Fallback to generic UPI
-                        if (!document.hasFocus()) {
-                            window.location.href = `upi://pay?pa=${PAYMENT_CONFIG.upiId}&pn=${PAYMENT_CONFIG.payeeName}&am=${PAYMENT_CONFIG.amount}`;
-                        }
-                    }, 1000);
-                }
-            };
-
-            // Manual instructions
-            window.showManualInstructions = function () {
-                alert(`Manual Payment Instructions:\n\n1. Open your UPI app (GPay, PhonePe, Paytm, etc.)\n2. Tap on "Scan QR Code"\n3. Scan the QR code above\n4. Enter amount: ₹${PAYMENT_CONFIG.amount}\n5. Complete the payment\n6. Save the transaction ID\n\nUPI ID: ${PAYMENT_CONFIG.upiId}`);
-            };
-
-            // Payment verification
-            window.verifyPayment = async function () {
-                const transactionId = document.getElementById('transaction-id').value.trim();
-                const verifyButton = document.querySelector('.verify-button');
-                const successMessage = document.getElementById('success-message');
-                const errorMessage = document.getElementById('error-message');
-
-                // Hide previous messages
-                successMessage.style.display = 'none';
-                errorMessage.style.display = 'none';
-
-                // Validate transaction ID
-                if (!transactionId) {
-                    showError('Please enter your transaction ID');
-                    return;
-                }
-
-                // Validate format (basic UPI transaction ID pattern)
-                const transactionPatterns = [
-                    /^[A-Z0-9]{8,20}$/i,
-                    /^[A-Z]{3}[0-9]{10,15}$/i,
-                    /^[0-9]{12,16}$/,
-                    /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/i
-                ];
-
-                const isValidFormat = transactionPatterns.some(pattern => pattern.test(transactionId));
-                if (!isValidFormat) {
-                    showError('Invalid transaction ID format. Please enter a valid UPI transaction ID.');
-                    return;
-                }
-
-                // Show loading state
-                const originalText = verifyButton.innerHTML;
-                verifyButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
-                verifyButton.disabled = true;
-
-                try {
-                    // Simulate verification (replace with actual API call)
-                    await simulateVerification(transactionId);
-
-                    // Show success
-                    verifyButton.innerHTML = '<i class="fas fa-check-circle"></i> Verified!';
-                    verifyButton.style.background = 'linear-gradient(45deg, var(--success), #3aa83a)';
-                    verifyButton.disabled = true;
-
-                    successMessage.style.display = 'flex';
-
-                    // Save to localStorage
-                    localStorage.setItem('paymentVerified', 'true');
-                    localStorage.setItem('transactionId', transactionId);
-                    localStorage.setItem('paymentTime', new Date().toISOString());
-
-                    // Start countdown to redirect
-                    startRedirectCountdown();
-
-                } catch (error) {
-                    // Show error
-                    verifyButton.innerHTML = originalText;
-                    verifyButton.disabled = false;
-                    showError(error.message || 'Verification failed. Please try again.');
-                }
-            };
-
-            async function simulateVerification(transactionId) {
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        // Simulate 80% success rate for demo
-                        const isSuccess = Math.random() > 0.2;
-
-                        if (isSuccess) {
-                            resolve({
-                                success: true,
-                                transactionId,
-                                timestamp: new Date().toISOString()
-                            });
-                        } else {
-                            reject(new Error('Transaction ID not found. Please verify the ID and try again.'));
-                        }
-                    }, 2000);
-                });
-            }
-
-            function showError(message) {
-                const errorElement = document.getElementById('error-message');
-                errorElement.querySelector('p').textContent = message;
-                errorElement.style.display = 'flex';
-                errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-
-            function startRedirectCountdown() {
-                let seconds = Math.floor(PAYMENT_CONFIG.successRedirectDelay / 1000);
-                const successMessage = document.getElementById('success-message');
-
-                const countdownInterval = setInterval(() => {
-                    successMessage.querySelector('p').innerHTML = `
-                        <strong>Payment Verified Successfully!</strong><br>
-                        Your registration is now complete.<br>
-                        <small>Redirecting to homepage in ${seconds} seconds...</small>
-                    `;
-
-                    seconds--;
-
-                    if (seconds <= 0) {
-                        clearInterval(countdownInterval);
-                        window.location.href = 'index.html';
-                    }
-                }, 1000);
-            }
-        }
-    </script>
 </body>
 
 </html>
