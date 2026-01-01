@@ -503,6 +503,21 @@
             padding: var(--spacing-xl);
             box-shadow: var(--shadow-xl);
         }
+        /* FIX: show nav menu inside mobile drawer */
+.mobile-menu .nav-menu {
+    display: flex !important;
+    flex-direction: column;
+}
+
+.mobile-menu .nav-link {
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+.mobile-menu .btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
 
         .mobile-menu.active {
             right: 0;

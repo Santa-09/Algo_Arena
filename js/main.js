@@ -11,12 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Toggle mobile menu function
     const toggleMobileMenu = () => {
-        const isActive = mobileMenu.classList.contains('active');
-        
-        mobileMenu.classList.toggle('active');
-        overlay.classList.toggle('active');
-        hamburger.classList.toggle('active');
-        
+    mobileMenu.classList.toggle('active');
+    overlay.classList.toggle('active');
+    hamburger.classList.toggle('active');
+
+    
         // Animate hamburger to X
         const spans = hamburger.querySelectorAll('span');
         if (!isActive) {
